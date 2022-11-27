@@ -1,4 +1,4 @@
-#ZThon - @zzzzl1l
+# ZThon - @zzzzl1l
 import html
 
 from telethon.tl import functions
@@ -6,7 +6,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from ..Config import Config
 from ..sql_helper.globals import gvarstatus
-from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, zedub, edit_delete, get_user_from_event
+from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, edit_delete, get_user_from_event, zedub
 
 plugin_category = "العروض"
 DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
@@ -125,7 +125,9 @@ async def revert(event):
     await event.client(functions.account.UpdateProfileRequest(about=bio))
     await event.client(functions.account.UpdateProfileRequest(first_name=firstname))
     await event.client(functions.account.UpdateProfileRequest(last_name=lastname))
-    await edit_delete(event, "**⪼ تمت اعاده معلومـاتك والغـاء الانتحـال .. بنجـاح ✅ 𓆰**")
+    await edit_delete(
+        event, "**⪼ تمت اعاده معلومـاتك والغـاء الانتحـال .. بنجـاح ✅ 𓆰**"
+    )
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,

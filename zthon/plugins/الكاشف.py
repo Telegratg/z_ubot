@@ -1,20 +1,16 @@
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
-#الملف مرفـوع ع استضـافتـي مهمـا خمطت راح تطلـع حقـــوقــي بســورســـك
-#هههههههههههههههههه
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# الملف مرفـوع ع استضـافتـي مهمـا خمطت راح تطلـع حقـــوقــي بســورســـك
+# هههههههههههههههههه
 
-
-import asyncio
-import os
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from zthon import zedub
 
-from ..core.managers import edit_delete, edit_or_reply
+from ..core.managers import edit_or_reply
 from ..helpers.utils import reply_id
-from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "البحث"
 
@@ -55,7 +51,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**╮ . كـاشف الاࢪقـام الـ؏ـࢪبيـة 📲.. اࢪسـل** `.الكاشف` **للتعليـمات 𓅫╰**"
+            event,
+            "**╮ . كـاشف الاࢪقـام الـ؏ـࢪبيـة 📲.. اࢪسـل** `.الكاشف` **للتعليـمات 𓅫╰**",
         )
     chat = "@Zelzalybot"
     zzzzl1l = await edit_or_reply(event, "**╮•⎚ جـارِ الكـشف ؏ــن الـرقـم  📲 ⌭ . . .**")
@@ -68,7 +65,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzzzl1l.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Zelzalybot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzzzl1l.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Zelzalybot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzzzl1l.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -77,9 +76,7 @@ async def _(event):
             await event.client.send_message(event.chat_id, response.message)
 
 
-
 # Copyright (C) 2022 Zed-Thon . All Rights Reserved
 @zedub.zed_cmd(pattern="الكاشف")
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalPH_cmd)
-

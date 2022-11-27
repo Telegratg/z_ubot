@@ -26,7 +26,7 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from zthon import Convert, zedub
+from zthon import zedub
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import animator, crop_and_divide
@@ -231,7 +231,9 @@ async def add_to_pack(
             pack = 1
         packname = pack_name(userid, pack, is_anim, is_video)
         packnick = pack_nick(username, pack, is_anim, is_video)
-        await zedevent.edit(f"**⌔∮التبديـل الى الحزمـه** {pack} **بسبب امتـلاء الحزمـه الحاليـه ..** ")
+        await zedevent.edit(
+            f"**⌔∮التبديـل الى الحزمـه** {pack} **بسبب امتـلاء الحزمـه الحاليـه ..** "
+        )
         await conv.send_message(packname)
         x = await conv.get_response()
         if x.message == "Invalid set selected.":
@@ -374,14 +376,18 @@ async def kang(args):  # sourcery no-metrics
         if len(splat) == 2:
             if char_is_emoji(splat[0][0]):
                 if char_is_emoji(splat[1][0]):
-                    return await zedevent.edit("**- ارسـل الامـر**  `.معلومات الملصق`  **بالـرد ع الملصـق للتحـقق ...**")
+                    return await zedevent.edit(
+                        "**- ارسـل الامـر**  `.معلومات الملصق`  **بالـرد ع الملصـق للتحـقق ...**"
+                    )
                 pack = splat[1]  # User sent both
                 emoji = splat[0]
             elif char_is_emoji(splat[1][0]):
                 pack = splat[0]  # User sent both
                 emoji = splat[1]
             else:
-                return await zedevent.edit("**- ارسـل الامـر**  `.معلومات الملصق`  **بالـرد ع الملصـق للتحـقق ...**")
+                return await zedevent.edit(
+                    "**- ارسـل الامـر**  `.معلومات الملصق`  **بالـرد ع الملصـق للتحـقق ...**"
+                )
         elif len(splat) == 1:
             if char_is_emoji(splat[0][0]):
                 emoji = splat[0]
@@ -497,12 +503,14 @@ async def pack_kang(event):  # sourcery no-metrics
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
         return await edit_delete(
-            event, "** ⪼ بالـرد على أي ملصق لنسـخ جميـع الملصقـات في تلك الحزمـه .. لحـزمـه بحقـوقـك**"
+            event,
+            "** ⪼ بالـرد على أي ملصق لنسـخ جميـع الملصقـات في تلك الحزمـه .. لحـزمـه بحقـوقـك**",
         )
     try:
         stickerset_attr = reply.document.attributes[1]
         zedevent = await edit_or_reply(
-            event, "**⪼ جـارِ .. جـلب تفاصيـل حزمـة الملصقـات ، الرجـاء الانتظار . . .**"
+            event,
+            "**⪼ جـارِ .. جـلب تفاصيـل حزمـة الملصقـات ، الرجـاء الانتظار . . .**",
         )
     except BaseException:
         return await edit_delete(
@@ -655,9 +663,7 @@ async def pack_kang(event):  # sourcery no-metrics
         await asyncio.sleep(2)
     result = "**╮ تم نسـخ الحزمـه بحقوقك ɵ̷᷄ˬɵ̷᷅ ﮼ بنجـاح✅ ╰**\n\n"
     for i in enumerate(blablapacks):
-        result += (
-            f"  •  [الحـزمـة {blablapacknames[i[0]]}](t.me/addstickers/{blablapacks[i[0]]})"
-        )
+        result += f"  •  [الحـزمـة {blablapacknames[i[0]]}](t.me/addstickers/{blablapacks[i[0]]})"
     await zedevent.edit(result)
 
 
@@ -859,9 +865,7 @@ async def get_pack_info(event):
             event, "**جارٍ إحضار تفاصيل حزمة الملصقات ، يُرجى الانتظار ..**"
         )
     except BaseException:
-        return await edit_delete(
-            event, "**هذا ليس ملصقًا. الرد على ملصق.**", 5
-        )
+        return await edit_delete(event, "**هذا ليس ملصقًا. الرد على ملصق.**", 5)
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
         return await zedevent.edit("**هذا ليس ملصقًا. الرد على ملصق.**")
     get_stickerset = await event.client(

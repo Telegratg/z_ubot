@@ -6,7 +6,7 @@
 import bs4
 import requests
 
-from . import ALIVE_NAME, zedub, edit_or_reply
+from . import ALIVE_NAME, edit_or_reply, zedub
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "zedthon"
 
@@ -84,7 +84,9 @@ async def apk(event):
         app_details += f"\n\n    𓍹 {Name} 𓍻"
         await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
-        await event.edit("** لم يتم العثور على نتائج البحث يرجى وضع اسم تطبيق متوفر ❕**")
+        await event.edit(
+            "** لم يتم العثور على نتائج البحث يرجى وضع اسم تطبيق متوفر ❕**"
+        )
     except Exception as err:
         await event.edit("Exception Occured:- " + str(err))
 
@@ -161,14 +163,17 @@ async def apkr(event):
         app_details += "\n\n===> 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 - @ZedThon ® <==="
         await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
-        await event.edit("**عـذراً .. لا يـوجد نتائـج اكتـب الاسـم الصحيـح للتطبيـق وعـاود البحث مـرة اخـرى**")
+        await event.edit(
+            "**عـذراً .. لا يـوجد نتائـج اكتـب الاسـم الصحيـح للتطبيـق وعـاود البحث مـرة اخـرى**"
+        )
     except Exception as err:
         await event.edit("Exception Occured:- " + str(err))
 
 
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
-#الملف متعوب عليه So تخمط وماتذكـر المصـدر == اهينـك
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# الملف متعوب عليه So تخمط وماتذكـر المصـدر == اهينـك
+
 
 @zedub.zed_cmd(
     pattern="تطبيق ([\s\S]*)",

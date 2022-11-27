@@ -43,7 +43,8 @@ async def pollcreator(catpoll):
             await catpoll.delete()
         except PollOptionInvalidError:
             await edit_or_reply(
-                catpoll, "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**"
+                catpoll,
+                "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**",
             )
         except ForbiddenError:
             await edit_or_reply(catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **")
@@ -72,7 +73,9 @@ async def pollcreator(catpoll):
                     "**⌔∮ الاستفتاء المستخدم غير صالح (قد تكون المعلومات طويلة جدا).**",
                 )
             except ForbiddenError:
-                await edit_or_reply(catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **")
+                await edit_or_reply(
+                    catpoll, "**⌔∮ هذه الدردشة تحظر استطلاعات الرأي. **"
+                )
             except Exception as e:
                 await edit_or_reply(catpoll, str(e))
         else:

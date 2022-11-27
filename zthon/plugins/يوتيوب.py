@@ -2,16 +2,14 @@ import asyncio
 import glob
 import io
 import os
-import re
 import pathlib
+import re
 from time import time
-import requests
 
 try:
-    from pyquery import PyQuery as pq
+    pass
 except ModuleNotFoundError:
     os.system("pip3 install pyquery")
-    from pyquery import PyQuery as pq
 
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -168,7 +166,10 @@ async def download_audio(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
     zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل انتظر قليلا ▬▭ ...**")
     reply_to_id = await reply_id(event)
     for url in urls:
@@ -256,7 +257,10 @@ async def download_video(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
     zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل انتظر قليلا ▬▭ ...**")
     reply_to_id = await reply_id(event)
     for url in urls:
@@ -328,8 +332,13 @@ async def download_video(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
-    zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل مـن فيـس بـوك انتظر قليلا ▬▭ ...**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
+    zedevent = await edit_or_reply(
+        event, "**⌔╎جـارِ التحميل مـن فيـس بـوك انتظر قليلا ▬▭ ...**"
+    )
     reply_to_id = await reply_id(event)
     for url in urls:
         ytdl_data = await ytdl_down(zedevent, video_opts, url)
@@ -400,7 +409,10 @@ async def download_video(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
     zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل انتظر قليلا ▬▭ ...**")
     reply_to_id = await reply_id(event)
     for url in urls:
@@ -452,6 +464,7 @@ async def download_video(event):
             await asyncio.sleep(2)
     await event.delete()
 
+
 @zedub.zed_cmd(
     pattern="لايكي(?:\s|$)([\s\S]*)",
     command=("لايكي", plugin_category),
@@ -471,7 +484,10 @@ async def download_video(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
     zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل انتظر قليلا ▬▭ ...**")
     reply_to_id = await reply_id(event)
     for url in urls:
@@ -540,7 +556,10 @@ async def download_audio(event):
         msg = rmsg.text
     urls = extractor.find_urls(msg)
     if not urls:
-        return await edit_or_reply(event, "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**")
+        return await edit_or_reply(
+            event,
+            "**- قـم بادخــال رابـط مع الامـر او بالــرد ع رابـط ليتـم التحميـل**",
+        )
     zedevent = await edit_or_reply(event, "**⌔╎جـارِ التحميل انتظر قليلا ▬▭ ...**")
     reply_to_id = await reply_id(event)
     for url in urls:
@@ -628,9 +647,7 @@ async def insta_dl(event):
     if not link:
         return await edit_delete(event, "**- احتـاج الـر رابــط للتحميــل**", 10)
     if "instagram.com" not in link:
-        return await edit_delete(
-            event, "**- احتـاج الـر رابــط للتحميــل**", 10
-        )
+        return await edit_delete(event, "**- احتـاج الـر رابــط للتحميــل**", 10)
     v1 = "@instasave_bot"
     v2 = "@videomaniacbot"
     media_list = []

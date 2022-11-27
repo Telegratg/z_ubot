@@ -1,8 +1,8 @@
 """
 ©ZelZal™
 """
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
 
 import asyncio
 import base64
@@ -20,7 +20,6 @@ from telethon.tl.functions.messages import SendMediaRequest
 from zthon import zedub
 
 from ..Config import Config
-from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from . import make_gif, progress
 
@@ -237,12 +236,16 @@ async def _(event):
         return
     input_str = event.pattern_match.group(1)
     if input_str is None:
-        await edit_or_reply(event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`")
+        await edit_or_reply(
+            event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`"
+        )
         return
     if input_str in ["صوت", "بصمه"]:
         event = await edit_or_reply(event, "**جاري التحويل...**")
     else:
-        await edit_or_reply(event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`")
+        await edit_or_reply(
+            event, "اعد الامر بالرد على الفيديو `.حول بصمه` او`.حول صوت`"
+        )
         return
     try:
         start = datetime.now()
@@ -332,8 +335,9 @@ async def _(event):
             )
             os.remove(new_required_file_name)
             await event.delete()
-            
-#ZedThon 
+
+
+# ZedThon
 @zedub.zed_cmd(pattern="متحركه ?(.*)")
 async def gifs(ult):
     get = ult.pattern_match.group(1)
@@ -358,5 +362,3 @@ async def gifs(ult):
                 ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
             )
     await m.delete()
-
-

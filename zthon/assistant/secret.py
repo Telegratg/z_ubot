@@ -22,7 +22,11 @@ async def on_plug_in_callback_query_handler(event):
             else:
                 reply_pop_up_alert = "مطـي الهمسـه مـو الك 🧑🏻‍🦯🦓"
         except KeyError:
-            reply_pop_up_alert = "- عـذراً .. هذه الرسـالة لم تعد موجـوده في سيـرفرات زدثــون"
+            reply_pop_up_alert = (
+                "- عـذراً .. هذه الرسـالة لم تعد موجـوده في سيـرفرات زدثــون"
+            )
     else:
-        reply_pop_up_alert = "- عـذراً .. هذه الرسـالة لم تعد موجـوده في سيـرفرات زدثــون"
+        reply_pop_up_alert = (
+            "- عـذراً .. هذه الرسـالة لم تعد موجـوده في سيـرفرات زدثــون"
+        )
     await event.answer(reply_pop_up_alert, cache_time=0, alert=True)

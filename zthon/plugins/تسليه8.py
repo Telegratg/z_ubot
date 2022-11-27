@@ -1,21 +1,12 @@
 # animation code for zed edit by @zlzzl77
 
-import asyncio
-from collections import deque
-import os
-import random
-from urllib.parse import quote_plus
-from collections import deque
 from telethon.tl.types import ChannelParticipantsAdmins
-from zthon.core.logger import logging
-from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
-from . import ALIVE_NAME, deEmojify, mention
 
+from zthon import zedub
+
+from ..core.managers import edit_or_reply
 
 plugin_category = "الترفيه"
-
 
 
 @zedub.zed_cmd(pattern="جو$")
@@ -144,17 +135,15 @@ async def test(event):
 
 
 Fun8_cmd = (
-
-"**الاوامــر : **"
-"  •  `.جو`"
-"  •  `.كليم`"
-"  •  `.نار`"
-"  •  `.انتحر`"
-"  •  `.مذاكره`"
-"  •  `.القمر`"
-"  •  `.مدينه`"
-  
-"**للنســخ : ** __اضغط ع الامـر لنسخـه__"
+    "**الاوامــر : **"
+    "  •  `.جو`"
+    "  •  `.كليم`"
+    "  •  `.نار`"
+    "  •  `.انتحر`"
+    "  •  `.مذاكره`"
+    "  •  `.القمر`"
+    "  •  `.مدينه`"
+    "**للنســخ : ** __اضغط ع الامـر لنسخـه__"
 )
 
 # Copyright (C) 2022 Zedthon . All Rights Reserved

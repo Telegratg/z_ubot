@@ -1,17 +1,7 @@
-import base64
-import contextlib
-from asyncio import sleep
-
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from telethon.utils import get_display_name
-
 from zthon import zedub
 
 from ..core.logger import logging
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _format, get_user_from_event
-from ..sql_helper import broadcast_sql as sql
-from . import BOTLOG, BOTLOG_CHATID
+from ..core.managers import edit_or_reply
 
 plugin_category = "البوت"
 LOGS = logging.getLogger(__name__)
@@ -19,7 +9,7 @@ LOGS = logging.getLogger(__name__)
 ZED_BLACKLIST = [
     -1001236815136,
     -1001614012587,
-    ]
+]
 
 DEVZ = [
     1895219306,
@@ -56,9 +46,13 @@ async def gcast(event):
     elif event.is_reply:
         msg = await event.get_reply_message()
     else:
-        await edit_or_reply(event, "**✾╎بالـرد ؏ــلى رسـالة او وسائـط او كتابـة رسـالة مع الامـࢪ**")
+        await edit_or_reply(
+            event, "**✾╎بالـرد ؏ــلى رسـالة او وسائـط او كتابـة رسـالة مع الامـࢪ**"
+        )
         return
-    roz = await edit_or_reply(event, "**✾╎ جـاري الاذاعـه في المجموعـات ...الرجـاء الانتظـار**")
+    roz = await edit_or_reply(
+        event, "**✾╎ جـاري الاذاعـه في المجموعـات ...الرجـاء الانتظـار**"
+    )
     er = 0
     done = 0
     async for x in event.client.iter_dialogs():
@@ -73,7 +67,8 @@ async def gcast(event):
     await roz.edit(
         f"**✾╎تمت الاذاعـه بنجـاح الـى ** `{done}` **من المجموعـات ، خطـأ في الارسـال الـى ** `{er}` **من المجموعـات**"
     )
-    
+
+
 @zedub.zed_cmd(pattern=f"للخاص(?: |$)(.*)")
 async def gucast(event):
     zedthon = event.pattern_match.group(1)
@@ -82,9 +77,13 @@ async def gucast(event):
     elif event.is_reply:
         msg = await event.get_reply_message()
     else:
-        await edit_or_reply(event, "**✾╎بالـرد ؏ــلى رسـالة او وسائـط او كتابـة رسـالة مع الامـࢪ**")
+        await edit_or_reply(
+            event, "**✾╎بالـرد ؏ــلى رسـالة او وسائـط او كتابـة رسـالة مع الامـࢪ**"
+        )
         return
-    roz = await edit_or_reply(event, "**✾╎ جـاري الاذاعـه في الخـاص ...الرجـاء الانتظـار**")
+    roz = await edit_or_reply(
+        event, "**✾╎ جـاري الاذاعـه في الخـاص ...الرجـاء الانتظـار**"
+    )
     er = 0
     done = 0
     async for x in event.client.iter_dialogs():
@@ -99,7 +98,7 @@ async def gucast(event):
     await roz.edit(
         f"**✾╎تمت الاذاعـه بنجـاح الـى ** `{done}` **من الخـاص ، خطـأ في الارسـال الـى ** `{er}` **من الخـاص**"
     )
-    
+
 
 @zedub.zed_cmd(pattern="خاص ?(.*)")
 async def pmto(event):
@@ -117,7 +116,8 @@ async def pmto(event):
         return
     try:
         await zedub.send_message(chat_id, msg)
-        await event.edit("**✾╎تـم ارسال الرسـالة الـى الشخـص بـدون الدخـول للخـاص .. بنجـاح ✓**")
+        await event.edit(
+            "**✾╎تـم ارسال الرسـالة الـى الشخـص بـدون الدخـول للخـاص .. بنجـاح ✓**"
+        )
     except BaseException:
         await event.edit("**✾╎اووبس .. لقـد حدث خطـأ مـا .. اعـد المحـاوله**")
-

@@ -14,32 +14,26 @@ ZThon - ZelZal
 """
 
 import contextlib
-import html
 import os
-import base64
 
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from telethon.tl.types import MessageEntityMentionName
-
-from requests import get
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
 
 from zthon import zedub
 from zthon.core.logger import logging
 
 from ..Config import Config
-from ..core.managers import edit_or_reply, edit_delete
-from ..helpers import reply_id
+from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper.globals import gvarstatus
-from . import spamwatch
 
 plugin_category = "العروض"
 LOGS = logging.getLogger(__name__)
-ZED_TEXT = gvarstatus("CUSTOM_ALIVE_TEXT") or "•⎚• مـعلومـات المسـتخـدم مـن بـوت زدثــون"
+ZED_TEXT = (
+    gvarstatus("CUSTOM_ALIVE_TEXT") or "•⎚• مـعلومـات المسـتخـدم مـن بـوت زدثــون"
+)
 ZEDM = gvarstatus("CUSTOM_ALIVE_EMOJI") or "✦"
 ZEDF = gvarstatus("CUSTOM_ALIVE_FONT") or "⋆─┄─┄─┄─ ᶻᵗʰᵒᶰ ─┄─┄─┄─⋆"
-
 
 
 async def get_user_from_event(event):
@@ -77,19 +71,18 @@ async def fetch_info(replied_user, event):
         GetUserPhotosRequest(user_id=replied_user.id, offset=42, max_id=0, limit=80)
     )
     replied_user_profile_photos_count = "لايـوجـد بروفـايـل"
-    dc_id = "Can't get dc id"
     with contextlib.suppress(AttributeError):
         replied_user_profile_photos_count = replied_user_profile_photos.count
-        dc_id = replied_user.photo.dc_id
+        replied_user.photo.dc_id
     user_id = replied_user.id
     first_name = replied_user.first_name
     full_name = FullUser.private_forward_name
-    common_chat = FullUser.common_chats_count
+    FullUser.common_chats_count
     username = replied_user.username
     user_bio = FullUser.about
-    is_bot = replied_user.bot
-    restricted = replied_user.restricted
-    verified = replied_user.verified
+    replied_user.bot
+    replied_user.restricted
+    replied_user.verified
     photo = await event.client.download_profile_photo(
         user_id,
         Config.TMP_DOWNLOAD_DIRECTORY + str(user_id) + ".jpg",
@@ -103,18 +96,74 @@ async def fetch_info(replied_user, event):
     full_name = full_name or first_name
     username = "@{}".format(username) if username else ("لايـوجـد معـرف")
     user_bio = "لايـوجـد" if not user_bio else user_bio
-# الـرتب الوهميـه كتـابـة الكـود - زلــزال الـهيبــه @zzzzl1l
-    zed_dev = (2095357462, 1895219306, 925972505, 1346542270, 1885375980, 1721284724, 1951523146, 1243462298, 1037828349, 1985711199, 2028523456, 2045039090, 1764272868, 2067387667, 294317157, 2066568220, 1403932655, 1389046667, 444672531, 2055451976, 294317157, 2134101721, 1719023510, 1985225531, 2107283646, 2146086267, 1850533212, 5280339206)
-    zel_dev = (2095357462, 1346542270, 1885375980, 1721284724, 1951523146, 1243462298, 1037828349, 1985711199, 2028523456, 2045039090, 1764272868, 2067387667, 294317157, 2066568220, 1403932655, 1389046667, 444672531, 2055451976, 294317157, 2134101721, 1719023510, 1985225531, 2107283646, 2146086267, 1850533212, 5280339206)
+    # الـرتب الوهميـه كتـابـة الكـود - زلــزال الـهيبــه @zzzzl1l
+    zed_dev = (
+        2095357462,
+        1895219306,
+        925972505,
+        1346542270,
+        1885375980,
+        1721284724,
+        1951523146,
+        1243462298,
+        1037828349,
+        1985711199,
+        2028523456,
+        2045039090,
+        1764272868,
+        2067387667,
+        294317157,
+        2066568220,
+        1403932655,
+        1389046667,
+        444672531,
+        2055451976,
+        294317157,
+        2134101721,
+        1719023510,
+        1985225531,
+        2107283646,
+        2146086267,
+        1850533212,
+        5280339206,
+    )
+    zel_dev = (
+        2095357462,
+        1346542270,
+        1885375980,
+        1721284724,
+        1951523146,
+        1243462298,
+        1037828349,
+        1985711199,
+        2028523456,
+        2045039090,
+        1764272868,
+        2067387667,
+        294317157,
+        2066568220,
+        1403932655,
+        1389046667,
+        444672531,
+        2055451976,
+        294317157,
+        2134101721,
+        1719023510,
+        1985225531,
+        2107283646,
+        2146086267,
+        1850533212,
+        5280339206,
+    )
     if user_id == 925972505 or user_id == 1895219306:
-        rotbat = "⌁ مطـور السـورس 𓄂𓆃 ⌁" 
+        rotbat = "⌁ مطـور السـورس 𓄂𓆃 ⌁"
     elif user_id in zel_dev:
-        rotbat = "⌁ مطـور مسـاعـد 𐏕⌁" 
+        rotbat = "⌁ مطـور مسـاعـد 𐏕⌁"
     elif user_id == (await event.client.get_me()).id and user_id not in zed_dev:
-        rotbat = "⌁ مـالك الحساب 𓀫 ⌁" 
+        rotbat = "⌁ مـالك الحساب 𓀫 ⌁"
     else:
         rotbat = "⌁ العضـو 𓅫 ⌁"
-# Copyright (C) 2021 Zed-Thon . All Rights Reserved
+    # Copyright (C) 2021 Zed-Thon . All Rights Reserved
     caption = f"<b> {ZED_TEXT} </b>\n"
     caption += f"ٴ<b> {ZEDF} </b>\n"
     caption += f"<b> {ZEDM} الاسـم    ⇠ </b> "
@@ -265,14 +314,14 @@ async def potocmd(event):
                     photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
             except Exception:
-                return await edit_delete(event, "**- لايـوجـد هنـاك صـور لهـذا الشخـص ؟! **")
+                return await edit_delete(
+                    event, "**- لايـوجـد هنـاك صـور لهـذا الشخـص ؟! **"
+                )
     else:
         try:
             uid = int(uid)
             if uid <= 0:
-                await edit_or_reply(
-                    event, "**- رقـم خـاطـئ . . .**"
-                )
+                await edit_or_reply(event, "**- رقـم خـاطـئ . . .**")
                 return
         except BaseException:
             await edit_or_reply(event, "**- رقـم خـاطـئ . . .**")
@@ -285,4 +334,3 @@ async def potocmd(event):
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
     await event.delete()
-

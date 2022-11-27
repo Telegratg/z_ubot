@@ -8,8 +8,7 @@ from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest
 
 from zthon import zedub
-from zthon.core.logger import logging
-from ..core.managers import edit_or_reply, edit_delete
+
 from ..sql_helper.globals import gvarstatus
 
 plugin_category = "الادوات"
@@ -73,7 +72,6 @@ def user_full_name(user):
     return full_name
 
 
-
 @zedub.zed_cmd(pattern=f"{ZADD} ?(.*)")
 async def get_users(event):
     sender = await event.get_sender()
@@ -93,7 +91,7 @@ async def get_users(event):
     await eva.edit(
         "**╮  حـالة الإضافـه :**\n\n**╮  جـاري جـمع معـلومات الاعضـاء ...⏳**"
     )
-    async for user in event.client.iter_participants( ZEDTHON.full_chat.id):
+    async for user in event.client.iter_participants(ZEDTHON.full_chat.id):
         try:
             if error.startswith("Too"):
                 return (
@@ -114,4 +112,3 @@ async def get_users(event):
     return await eva.edit(
         f"**⌔∮تـمت الإضافـه بنجـاح ✅** \n\n• تـم اضـافة `{s}` \n• خـطأ بإضافـة `{f}`"
     )
-

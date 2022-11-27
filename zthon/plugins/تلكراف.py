@@ -15,7 +15,7 @@ from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import delete_conv
-from . import BOTLOG, BOTLOG_CHATID, zedub, reply_id
+from . import BOTLOG, BOTLOG_CHATID, reply_id, zedub
 
 LOGS = logging.getLogger(__name__)
 
@@ -74,7 +74,9 @@ async def _(event):
         )
         end = datetime.now()
         ms = (end - start).seconds
-        await zedevent.edit(f"** ⪼ تم تحميل {downloaded_file_name} في وقت {ms} ثانيه.**")
+        await zedevent.edit(
+            f"** ⪼ تم تحميل {downloaded_file_name} في وقت {ms} ثانيه.**"
+        )
         if downloaded_file_name.endswith((".webp")):
             resize_image(downloaded_file_name)
         try:

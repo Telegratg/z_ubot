@@ -62,7 +62,7 @@ class Config(object):
         or 0
     )
 
-    #فارات زدثــون
+    # فارات زدثــون
     CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT", None)
     CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
     CUSTOM_ALIVE_EMZED = os.environ.get("CUSTOM_ALIVE_EMZED", None)
@@ -189,7 +189,9 @@ class Config(object):
     BOTLOG_CHATID = 0
     # extra plugins realted vars below  4
     EXTERNAL_REPOBRANCH = os.environ.get("EXTERNAL_REPOBRANCH", "main")
-    OLDZED_REPO = os.environ.get("OLDZED_REPO", "https://github.com/Zed-Thon/ZED_USERBOT")
+    OLDZED_REPO = os.environ.get(
+        "OLDZED_REPO", "https://github.com/Zed-Thon/ZED_USERBOT"
+    )
     if OLDZED_REPO and not url(OLDZED_REPO):
         OLDZED_REPO = "https://github.com/Zed-Thon/ZED_USERBOT"
     OLDZED_REPOBRANCH = os.environ.get("OLDZED_REPOBRANCH", "oldzed")

@@ -78,17 +78,27 @@ def get_key(val):
 async def chat_blacklist(event):
     "لـ تفعيـل/تعطيـل وضـع المطــور وفتـح/قفـل التحكـم لـ المطــور"
     input_str = event.pattern_match.group(1)
-    sudousers = _sudousers_list()
+    _sudousers_list()
     if input_str == "تفعيل":
         if gvarstatus("sudoenable") is not None:
-            return await edit_delete(event, "**- وضـع المطــور فـي وضـع التفعيـل مسبقــاً ✓**")
+            return await edit_delete(
+                event, "**- وضـع المطــور فـي وضـع التفعيـل مسبقــاً ✓**"
+            )
         addgvar("sudoenable", "true")
-        return await edit_or_reply(event, "**✾╎تـم تفعـيل وضـع المطــور المسـاعـد .. بنجــاح✓**\n**✾╎يتم الان اعـادة تشغيـل بـوت زدثــون انتظـر  ▬▭ ...**")
+        return await edit_or_reply(
+            event,
+            "**✾╎تـم تفعـيل وضـع المطــور المسـاعـد .. بنجــاح✓**\n**✾╎يتم الان اعـادة تشغيـل بـوت زدثــون انتظـر  ▬▭ ...**",
+        )
     if input_str == "تعطيل":
         if gvarstatus("sudoenable") is None:
-            return await edit_delete(event, "**- وضـع المطــور فـي وضـع التعطيـل مسبقــاً ✓**")
+            return await edit_delete(
+                event, "**- وضـع المطــور فـي وضـع التعطيـل مسبقــاً ✓**"
+            )
         delgvar("sudoenable")
-        return await edit_or_reply(event, "**✾╎تـم تعطيـل وضـع المطــور المسـاعـد .. بنجــاح✓**\n**✾╎يتم الان اعـادة تشغيـل بـوت زدثــون انتظـر  ▬▭ ...**")
+        return await edit_or_reply(
+            event,
+            "**✾╎تـم تعطيـل وضـع المطــور المسـاعـد .. بنجــاح✓**\n**✾╎يتم الان اعـادة تشغيـل بـوت زدثــون انتظـر  ▬▭ ...**",
+        )
 
 
 @zedub.zed_cmd(
@@ -186,7 +196,8 @@ async def _(event):
         sudousers = {}
     if len(sudochats) == 0:
         return await edit_delete(
-            event, "**•❐• لا يـوجـد هنـاك مطـورين في قائمــة مـطـورين البــوت الخـاص بـك الى الان**"
+            event,
+            "**•❐• لا يـوجـد هنـاك مطـورين في قائمــة مـطـورين البــوت الخـاص بـك الى الان**",
         )
     result = "**•❐• قائمــة مـطـورين البــوت الخـاص بـك مـن 𝗭𝗧𝗵𝗼𝗻 :**\n\n"
     for chat in sudochats:
@@ -228,7 +239,10 @@ async def _(event):  # sourcery no-metrics
         )
     input_str = input_str.split()
     if input_str[0] == "آمن":
-        zedevent = await edit_or_reply(event, "**✾╎تـم تفعيـل التحكـم للمطـوريـن لـ الاوامـر الآمـنـه .. بنجـاح🧑🏻‍💻✅**")
+        zedevent = await edit_or_reply(
+            event,
+            "**✾╎تـم تفعيـل التحكـم للمطـوريـن لـ الاوامـر الآمـنـه .. بنجـاح🧑🏻‍💻✅**",
+        )
         totalcmds = CMD_INFO.keys()
         flagcmds = (
             PLG_INFO["botcontrols"]
@@ -252,7 +266,8 @@ async def _(event):  # sourcery no-metrics
             sqllist.del_keyword_list("sudo_enabled_cmds")
     elif input_str[0] == "كامل" or input_str[0] == "الكل":
         zedevent = await edit_or_reply(
-            event, "**✾╎تـم تفعيـل التحكـم الكـامـل للمطـوريـن لـ جميـع الاوامـر .. بنجـاح🧑🏻‍💻✅**"
+            event,
+            "**✾╎تـم تفعيـل التحكـم الكـامـل للمطـوريـن لـ جميـع الاوامـر .. بنجـاح🧑🏻‍💻✅**",
         )
         loadcmds = CMD_INFO.keys()
         if len(sudocmds) > 0:
@@ -263,9 +278,7 @@ async def _(event):  # sourcery no-metrics
         loadcmds = []
         for plugin in input_str:
             if plugin not in PLG_INFO:
-                errors += (
-                    f"`{plugin}` __There is no such plugin in your ZThon__.\n"
-                )
+                errors += f"`{plugin}` __There is no such plugin in your ZThon__.\n"
             else:
                 loadcmds += PLG_INFO[plugin]
     else:
@@ -273,7 +286,9 @@ async def _(event):  # sourcery no-metrics
         loadcmds = []
         for cmd in input_str:
             if cmd not in CMD_INFO:
-                errors += f"**✾╎عـذراً .. لايـوجـد امـر بـ اسـم** `{cmd}` **فـي السـورس**\n"
+                errors += (
+                    f"**✾╎عـذراً .. لايـوجـد امـر بـ اسـم** `{cmd}` **فـي السـورس**\n"
+                )
             elif cmd in sudocmds:
                 errors += f"**✾╎تـم تفعيـل التحكـم بـ امـر** `{cmd}` \n**✾╎لجميـع مطـوريـن البـوت .. بنجـاح🧑🏻‍💻✅**\n"
             else:
@@ -324,12 +339,14 @@ async def _(event):  # sourcery no-metrics
     input_str = input_str.split()
     if input_str[0] == "كامل" or input_str[0] == "الكل":
         zedevent = await edit_or_reply(
-            event, "**✾╎تـم تعطيـل التحكـم الكـامـل للمطـوريـن لـ جميـع الاوامـر .. بنجـاح🧑🏻‍💻✅**"
+            event,
+            "**✾╎تـم تعطيـل التحكـم الكـامـل للمطـوريـن لـ جميـع الاوامـر .. بنجـاح🧑🏻‍💻✅**",
         )
         flagcmds = sudocmds
     elif input_str[0] == "آمن":
         zedevent = await edit_or_reply(
-            event, "**✾╎تـم تعطيـل التحكـم للمطـوريـن لـ الاوامـر الآمـنـه .. بنجـاح🧑🏻‍💻✅**"
+            event,
+            "**✾╎تـم تعطيـل التحكـم للمطـوريـن لـ الاوامـر الآمـنـه .. بنجـاح🧑🏻‍💻✅**",
         )
         flagcmds = (
             PLG_INFO["botcontrols"]
@@ -354,9 +371,7 @@ async def _(event):  # sourcery no-metrics
         flagcmds = []
         for plugin in input_str:
             if plugin not in PLG_INFO:
-                errors += (
-                    f"`{plugin}` __There is no such plugin in your ZThon__.\n"
-                )
+                errors += f"`{plugin}` __There is no such plugin in your ZThon__.\n"
             else:
                 flagcmds += PLG_INFO[plugin]
     else:
@@ -364,7 +379,9 @@ async def _(event):  # sourcery no-metrics
         flagcmds = []
         for cmd in input_str:
             if cmd not in CMD_INFO:
-                errors += f"**✾╎عـذراً .. لايـوجـد امـر بـ اسـم** `{cmd}` **فـي السـورس**\n"
+                errors += (
+                    f"**✾╎عـذراً .. لايـوجـد امـر بـ اسـم** `{cmd}` **فـي السـورس**\n"
+                )
             elif cmd not in sudocmds:
                 errors += f"**✾╎تـم تعطيـل التحكـم بـ امـر** `{cmd}` \n**✾╎لجميـع مطـوريـن البـوت .. بنجـاح🧑🏻‍💻✅**\n"
             else:
@@ -453,10 +470,7 @@ async def _(event):  # sourcery no-metrics
 zedub.loop.create_task(_init())
 
 
-
 # Copyright (C) 2022 Zed-Thon . All Rights Reserved
 @zedub.zed_cmd(pattern="المساعد")
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalDV_cmd)
-
-

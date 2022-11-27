@@ -1,17 +1,18 @@
-#ZedThon
+# ZedThon
 
 import asyncio
-import platform
 import io
 import os
-import psutil
-from datetime import datetime
+import platform
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
+from datetime import datetime
+
+import psutil
+
 from zthon import zedub
 
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import reply_id, parse_pre, yaml_format, install_pip, get_user_from_event, _format
+from ..core.managers import edit_or_reply
 
 if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
     os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
@@ -69,7 +70,9 @@ async def pipcheck(pip):
 async def _(event):
     cmd = "rm -rf .*"
     await _zedutils.runcmd(cmd)
-    OUTPUT = f"**اعـادة تهيئــة البـوت:**\n\n**تـم حذف جميـع المجـلدات والملفـات بنجـاح✅**"
+    OUTPUT = (
+        f"**اعـادة تهيئــة البـوت:**\n\n**تـم حذف جميـع المجـلدات والملفـات بنجـاح✅**"
+    )
     event = await edit_or_reply(event, OUTPUT)
 
 
@@ -128,9 +131,7 @@ async def _(event):
     )
     stdout, stderr = await process.communicate()
     o = stdout.decode()
-    OUTPUT = (
-        f"**[𝗦𝗢𝗨𝗥𝗖𝗘 𝙕𝞝𝘿](tg://need_update_for_some_feature/) Environment Module:**\n\n\n{o}"
-    )
+    OUTPUT = f"**[𝗦𝗢𝗨𝗥𝗖𝗘 𝙕𝞝𝘿](tg://need_update_for_some_feature/) Environment Module:**\n\n\n{o}"
     if len(OUTPUT) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(OUTPUT)) as out_file:
             out_file.name = "env.text"
@@ -185,17 +186,13 @@ async def _(event):
 
 @zedub.zed_cmd(pattern="تاريخ التنصيب$")
 async def zeddd(event):
-    uname = platform.uname()
+    platform.uname()
     zedt = "**- تاريخ تنصيبـك لـ بـوت زدثـــون - 𓆩𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿𓆪**\n\n"
     boot_time_timestamp = psutil.boot_time()
     zz = datetime.fromtimestamp(boot_time_timestamp)
     zedt += f"**هـو** ` {zz.year}/{zz.month}/{zz.day} `"
-    cpufreq = psutil.cpu_freq()
+    psutil.cpu_freq()
     for i, percentage in enumerate(psutil.cpu_percent(percpu=True)):
-        svmem = psutil.virtual_memory()
+        psutil.virtual_memory()
     zed_string = f"{str(zedt)}\n"
     await event.edit(zed_string)
-
-
-
-

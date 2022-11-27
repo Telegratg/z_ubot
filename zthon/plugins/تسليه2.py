@@ -2,16 +2,10 @@
 
 import asyncio
 from collections import deque
-import os
-import random
-from urllib.parse import quote_plus
-from collections import deque
-from zthon.core.logger import logging
-from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
-from . import ALIVE_NAME, deEmojify, mention
 
+from zthon import zedub
+
+from ..core.managers import edit_or_reply
 
 plugin_category = "الترفيه"
 
@@ -195,20 +189,19 @@ async def _(event):
 
 
 Fun2_cmd = (
-"**╮•❐ اوامـر تسليـه متحـركه ممطـروقـه 2 ⦂ **\n\n"
-"  •  `.افكر`\n"
-"  •  `.متت`\n"
-"  •  `.ضايج`\n"
-"  •  `.ساعه`\n"
-"  •  `.مح`\n"
-"  •  `.قلب`\n"
-"  •  `.جيم`\n"
-"  •  `.الارض`\n"
-"  •  `.قمر`\n"
-"  •  `.اقمار`\n"
-"  •  `.قمور`\n\n"
-  
-"**للنســخ : ** __اضغط ع الامـر لنسخـه__"
+    "**╮•❐ اوامـر تسليـه متحـركه ممطـروقـه 2 ⦂ **\n\n"
+    "  •  `.افكر`\n"
+    "  •  `.متت`\n"
+    "  •  `.ضايج`\n"
+    "  •  `.ساعه`\n"
+    "  •  `.مح`\n"
+    "  •  `.قلب`\n"
+    "  •  `.جيم`\n"
+    "  •  `.الارض`\n"
+    "  •  `.قمر`\n"
+    "  •  `.اقمار`\n"
+    "  •  `.قمور`\n\n"
+    "**للنســخ : ** __اضغط ع الامـر لنسخـه__"
 )
 
 # Copyright (C) 2022 Zedthon . All Rights Reserved

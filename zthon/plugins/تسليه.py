@@ -1,8 +1,7 @@
 # ©source Zed - @ZlZZl77
-from zthon.core.logger import logging
 from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
+
+from ..core.managers import edit_or_reply
 
 plugin_category = "الترفيه"
 
@@ -395,23 +394,23 @@ async def bluedevildislike(dislike):
 
 
 Fun_cmd = (
-"**Commands found in art are **\n\n"
-"  •  `.ميت <text>`"
-"  •  `.مافيا <text>`"
-"  •  `.وحش`"
-"  •  `.خنزير`"
-"  •  `.مسدس`"
-"  •  `.كلب`"
-"  •  `.هلو`"
-"  •  `.طائره`"
-"  •  `.حبايب`"
-"  •  `.سوبر`"
-"  •  `.الهند`"
-"  •  `.هلا`"
-"  •  `.حيه`"
-"  •  `.باي`"
-"  •  `.خرا`"
-"  •  `.دس لايك`"
+    "**Commands found in art are **\n\n"
+    "  •  `.ميت <text>`"
+    "  •  `.مافيا <text>`"
+    "  •  `.وحش`"
+    "  •  `.خنزير`"
+    "  •  `.مسدس`"
+    "  •  `.كلب`"
+    "  •  `.هلو`"
+    "  •  `.طائره`"
+    "  •  `.حبايب`"
+    "  •  `.سوبر`"
+    "  •  `.الهند`"
+    "  •  `.هلا`"
+    "  •  `.حيه`"
+    "  •  `.باي`"
+    "  •  `.خرا`"
+    "  •  `.دس لايك`"
 )
 
 
@@ -419,4 +418,3 @@ Fun_cmd = (
 @zedub.zed_cmd(pattern="تسليه")
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, Fun_cmd)
-

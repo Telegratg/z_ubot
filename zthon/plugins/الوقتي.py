@@ -1,35 +1,30 @@
 # @Zed-Thon - ZelZal
 # Copyright (C) 2022 ZedThon . All Rights Reserved
-#< https://t.me/ZedThon >
+# < https://t.me/ZedThon >
 # This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/Zed-Thon/ZelZal/blob/master/LICENSE/>.
-#كـود الصورة الوقتيه كتـابتي وتعديلـي من زمان ومتعوب عليها 
-#+ كـود زخـرفة الصورة الوقتيه
-#+ دددي لا ابلـع حســابك بـانـد بطـعـم الليمــون 🍋😹🤘
-#زلــزال الهيبــه يـ ولــد - حقــوق لـ التــاريـخ ®
-#هههههههههههههههههههههههههههههههههههههههههههههههههه
+# كـود الصورة الوقتيه كتـابتي وتعديلـي من زمان ومتعوب عليها
+# + كـود زخـرفة الصورة الوقتيه
+# + دددي لا ابلـع حســابك بـانـد بطـعـم الليمــون 🍋😹🤘
+# زلــزال الهيبــه يـ ولــد - حقــوق لـ التــاريـخ ®
+# هههههههههههههههههههههههههههههههههههههههههههههههههه
 
 import asyncio
-import math
-import base64
 import os
 import shutil
 import time
-import requests
 from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
 
 from ..Config import Config
 from ..helpers.utils import _format
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from . import edit_delete, zedub, logging
+from . import edit_delete, logging, zedub
 
 plugin_category = "الادوات"
 DEFAULTUSER = gvarstatus("ALIVE_NAME") or Config.ALIVE_NAME
@@ -46,8 +41,14 @@ autophoto_path = os.path.join(os.getcwd(), "zthon", "photo_pfp.png")
 
 zedfont = gvarstatus("DEFAULT_PIC") or "zthon/helpers/styles/ZThon.ttf"
 NAUTO = gvarstatus("Z_NAUTO") or "(الاسم تلقائي|الاسم الوقتي|اسم وقتي|اسم تلقائي)"
-PAUTO = gvarstatus("Z_PAUTO") or "(البروفايل تلقائي|الصوره الوقتيه|الصورة الوقتية|صوره وقتيه|البروفايل)"
-BAUTO = gvarstatus("Z_BAUTO") or "(البايو تلقائي|البايو الوقتي|بايو وقتي|نبذه وقتيه|النبذه الوقتيه)"
+PAUTO = (
+    gvarstatus("Z_PAUTO")
+    or "(البروفايل تلقائي|الصوره الوقتيه|الصورة الوقتية|صوره وقتيه|البروفايل)"
+)
+BAUTO = (
+    gvarstatus("Z_BAUTO")
+    or "(البايو تلقائي|البايو الوقتي|بايو وقتي|نبذه وقتيه|النبذه الوقتيه)"
+)
 
 
 async def digitalpicloop():
@@ -87,13 +88,13 @@ async def digitalpicloop():
 
 async def autoname_loop():
     while AUTONAMESTART := gvarstatus("autoname") == "true":
-        DM = time.strftime("%d-%m-%y")
+        time.strftime("%d-%m-%y")
         HM = time.strftime("%I:%M")
         for normal in HM:
             if normal in normzltext:
-              namerzfont = gvarstatus("ZI_FN") or "𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬"
-              namefont = namerzfont[normzltext.index(normal)]
-              HM = HM.replace(normal, namefont)
+                namerzfont = gvarstatus("ZI_FN") or "𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬"
+                namefont = namerzfont[normzltext.index(normal)]
+                HM = HM.replace(normal, namefont)
         ZEDT = gvarstatus("CUSTOM_ALIVE_EMZED") or "⏐"
         name = f"{HM}{ZEDT}"
         LOGS.info(name)
@@ -109,13 +110,13 @@ async def autoname_loop():
 async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
-        DMY = time.strftime("%d.%m.%Y")
+        time.strftime("%d.%m.%Y")
         HM = time.strftime("%I:%M")
         for normal in HM:
             if normal in normzltext:
-              namerzfont = gvarstatus("ZI_FN") or "𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬"
-              namefont = namerzfont[normzltext.index(normal)]
-              HM = HM.replace(normal, namefont)
+                namerzfont = gvarstatus("ZI_FN") or "𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬"
+                namefont = namerzfont[normzltext.index(normal)]
+                HM = HM.replace(normal, namefont)
         DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
         bio = f"{DEFAULTUSERBIO} ⏐ {HM}"
         LOGS.info(bio)
@@ -178,7 +179,13 @@ async def _(event):
 async def _(event):  # sourcery no-metrics
     "To stop the functions of autoprofile plugin"
     input_str = event.pattern_match.group(1)
-    if input_str == "البروفايل تلقائي" or input_str == "البروفايل" or input_str == "البروفايل التلقائي" or input_str == "الصوره الوقتيه" or input_str == "الصورة الوقتية":
+    if (
+        input_str == "البروفايل تلقائي"
+        or input_str == "البروفايل"
+        or input_str == "البروفايل التلقائي"
+        or input_str == "الصوره الوقتيه"
+        or input_str == "الصورة الوقتية"
+    ):
         if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
             delgvar("digitalpic")
             await event.client(
@@ -188,7 +195,13 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "** تم الغاء  البروفايل التلقائي الان 𓆰**")
         return await edit_delete(event, "** لم يتم تمكين  البروفايل التلقائي 𓆰**")
-    if input_str == "الاسم تلقائي" or input_str == "الاسم" or input_str == "الاسم التلقائي" or input_str == "الاسم الوقتي" or input_str == "اسم الوقتي":
+    if (
+        input_str == "الاسم تلقائي"
+        or input_str == "الاسم"
+        or input_str == "الاسم التلقائي"
+        or input_str == "الاسم الوقتي"
+        or input_str == "اسم الوقتي"
+    ):
         if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
             delgvar("autoname")
             await event.client(
@@ -196,10 +209,21 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "**تم إيقاف الاسم التلقائي الآن 𓆰**")
         return await edit_delete(event, "**لم يتم تمكين الاسم التلقائي 𓆰**")
-    if input_str == "البايو تلقائي" or input_str == "البايو" or input_str == "البايو التلقائي" or input_str == "البايو الوقتي" or input_str == "النبذه الوقتيه" or input_str == "النبذة الوقتية" or input_str == "بايو الوقتي" or input_str == "نبذه الوقتي":
+    if (
+        input_str == "البايو تلقائي"
+        or input_str == "البايو"
+        or input_str == "البايو التلقائي"
+        or input_str == "البايو الوقتي"
+        or input_str == "النبذه الوقتيه"
+        or input_str == "النبذة الوقتية"
+        or input_str == "بايو الوقتي"
+        or input_str == "نبذه الوقتي"
+    ):
         if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
             delgvar("autobio")
-            DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            DEFAULTUSERBIO = (
+                gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            )
             await event.client(
                 functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)
             )
@@ -225,7 +249,13 @@ async def _(event):  # sourcery no-metrics
 async def _(event):  # sourcery no-metrics
     "To stop the functions of autoprofile plugin"
     input_str = event.pattern_match.group(1)
-    if input_str == "البروفايل تلقائي" or input_str == "البروفايل" or input_str == "البروفايل التلقائي" or input_str == "الصوره الوقتيه" or input_str == "الصورة الوقتية":
+    if (
+        input_str == "البروفايل تلقائي"
+        or input_str == "البروفايل"
+        or input_str == "البروفايل التلقائي"
+        or input_str == "الصوره الوقتيه"
+        or input_str == "الصورة الوقتية"
+    ):
         if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
             delgvar("digitalpic")
             await event.client(
@@ -235,7 +265,13 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "** تم الغاء  البروفايل التلقائي الان 𓆰**")
         return await edit_delete(event, "** لم يتم تمكين  البروفايل التلقائي 𓆰**")
-    if input_str == "الاسم تلقائي" or input_str == "الاسم" or input_str == "الاسم التلقائي" or input_str == "الاسم الوقتي" or input_str == "اسم الوقتي":
+    if (
+        input_str == "الاسم تلقائي"
+        or input_str == "الاسم"
+        or input_str == "الاسم التلقائي"
+        or input_str == "الاسم الوقتي"
+        or input_str == "اسم الوقتي"
+    ):
         if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
             delgvar("autoname")
             await event.client(
@@ -243,16 +279,26 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "**تم إيقاف الاسم التلقائي الآن 𓆰**")
         return await edit_delete(event, "**لم يتم تمكين الاسم التلقائي 𓆰**")
-    if input_str == "البايو تلقائي" or input_str == "البايو" or input_str == "البايو التلقائي" or input_str == "البايو الوقتي" or input_str == "النبذه الوقتيه" or input_str == "النبذة الوقتية" or input_str == "بايو الوقتي" or input_str == "نبذه الوقتي":
+    if (
+        input_str == "البايو تلقائي"
+        or input_str == "البايو"
+        or input_str == "البايو التلقائي"
+        or input_str == "البايو الوقتي"
+        or input_str == "النبذه الوقتيه"
+        or input_str == "النبذة الوقتية"
+        or input_str == "بايو الوقتي"
+        or input_str == "نبذه الوقتي"
+    ):
         if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
             delgvar("autobio")
-            DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            DEFAULTUSERBIO = (
+                gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            )
             await event.client(
                 functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)
             )
             return await edit_delete(event, "** تم الغاء  البايو التلقائي الان 𓆰**")
         return await edit_delete(event, "** لم يتم تمكين  البايو التلقائي 𓆰**")
-
 
 
 @zedub.zed_cmd(
@@ -273,7 +319,13 @@ async def _(event):  # sourcery no-metrics
 async def _(event):  # sourcery no-metrics
     "To stop the functions of autoprofile plugin"
     input_str = event.pattern_match.group(1)
-    if input_str == "البروفايل تلقائي" or input_str == "البروفايل" or input_str == "البروفايل التلقائي" or input_str == "الصوره الوقتيه" or input_str == "الصورة الوقتية":
+    if (
+        input_str == "البروفايل تلقائي"
+        or input_str == "البروفايل"
+        or input_str == "البروفايل التلقائي"
+        or input_str == "الصوره الوقتيه"
+        or input_str == "الصورة الوقتية"
+    ):
         if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
             delgvar("digitalpic")
             await event.client(
@@ -283,7 +335,13 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "** تم انهاء  البروفايل التلقائي الان 𓆰**")
         return await edit_delete(event, "** لم يتم تمكين  البروفايل التلقائي 𓆰**")
-    if input_str == "الاسم تلقائي" or input_str == "الاسم" or input_str == "الاسم التلقائي" or input_str == "الاسم الوقتي" or input_str == "اسم الوقتي":
+    if (
+        input_str == "الاسم تلقائي"
+        or input_str == "الاسم"
+        or input_str == "الاسم التلقائي"
+        or input_str == "الاسم الوقتي"
+        or input_str == "اسم الوقتي"
+    ):
         if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
             delgvar("autoname")
             await event.client(
@@ -291,10 +349,21 @@ async def _(event):  # sourcery no-metrics
             )
             return await edit_delete(event, "**تم إيقاف الاسم التلقائي الآن 𓆰**")
         return await edit_delete(event, "**لم يتم تمكين الاسم التلقائي 𓆰**")
-    if input_str == "البايو تلقائي" or input_str == "البايو" or input_str == "البايو التلقائي" or input_str == "البايو الوقتي" or input_str == "النبذه الوقتيه" or input_str == "النبذة الوقتية" or input_str == "بايو الوقتي" or input_str == "نبذه الوقتي":
+    if (
+        input_str == "البايو تلقائي"
+        or input_str == "البايو"
+        or input_str == "البايو التلقائي"
+        or input_str == "البايو الوقتي"
+        or input_str == "النبذه الوقتيه"
+        or input_str == "النبذة الوقتية"
+        or input_str == "بايو الوقتي"
+        or input_str == "نبذه الوقتي"
+    ):
         if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
             delgvar("autobio")
-            DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            DEFAULTUSERBIO = (
+                gvarstatus("DEFAULT_BIO") or "الحمد الله على كل شئ - @ZedThon"
+            )
             await event.client(
                 functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)
             )

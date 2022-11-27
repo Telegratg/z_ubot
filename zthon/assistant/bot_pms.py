@@ -307,7 +307,9 @@ async def handler(event):
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
-        return await event.reply("**- بالـرد على رسـالة الشخـص للحصول على المعلومات . . .**")
+        return await event.reply(
+            "**- بالـرد على رسـالة الشخـص للحصول على المعلومات . . .**"
+        )
     info_msg = await event.client.send_message(
         event.chat_id,
         "**🔎 جـارِ البحث عن هـذا المستخـدم في قاعدة البيـانات الخاصـة بك ...**",
@@ -415,7 +417,9 @@ async def send_flood_alert(user_) -> None:
             )
         except UserIsBlockedError:
             if BOTLOG:
-                await zedub.tgbot.send_message(BOTLOG_CHATID, "**- قم بالغـاء حظـر بوتك المسـاعـد ؟!**")
+                await zedub.tgbot.send_message(
+                    BOTLOG_CHATID, "**- قم بالغـاء حظـر بوتك المسـاعـد ؟!**"
+                )
     if FloodConfig.ALERT[user_.id].get("fa_id") is None and fa_msg:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
@@ -466,7 +470,9 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer("**- مكافـح التكـرار التلقـائي بالبـوت .. معطـل مسبقـاً**", alert=False)
+        return await c_q.answer(
+            "**- مكافـح التكـرار التلقـائي بالبـوت .. معطـل مسبقـاً**", alert=False
+        )
     delgvar("bot_antif")
     await c_q.answer("Bot Antiflood disabled.", alert=False)
     await c_q.edit("**- مكافـح التكـرار التلقـائي بالبـوت .. تم تعطيلـه بنجـاح✓**")

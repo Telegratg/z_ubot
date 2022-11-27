@@ -1,18 +1,15 @@
 # edit by: @ZedThon for zed
 
 import asyncio
-import os
-import random
-from urllib.parse import quote_plus
 from collections import deque
-from zthon.core.logger import logging
+
 from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
+
+from ..core.managers import edit_or_reply
 
 plugin_category = "الترفيه"
 
-from . import ALIVE_NAME, deEmojify
+from . import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "zed"
 
@@ -259,17 +256,17 @@ async def timer_blankx(e):
 
 
 Fun1_cmd = (
-"**Commands in animation1 are **"
-"  •  `.غبي`"
-"  •  `.قنابل`"
-"  •  `.اتصل`"
-"  •  `.قتل`"
-"  •  `.شنو`"
-"  •  `.طوبه`"
-"  •  `.شطرنج`"
-"  •  `.حلويات`"
-"  •  `.gangasta`"
-"  •  `.charging` "
+    "**Commands in animation1 are **"
+    "  •  `.غبي`"
+    "  •  `.قنابل`"
+    "  •  `.اتصل`"
+    "  •  `.قتل`"
+    "  •  `.شنو`"
+    "  •  `.طوبه`"
+    "  •  `.شطرنج`"
+    "  •  `.حلويات`"
+    "  •  `.gangasta`"
+    "  •  `.charging` "
 )
 
 # Copyright (C) 2022 Zedthon . All Rights Reserved

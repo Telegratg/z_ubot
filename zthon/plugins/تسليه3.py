@@ -3,16 +3,12 @@
 # edit by: @ZedThon for zed
 
 import asyncio
-import os
-import random
-from urllib.parse import quote_plus
 from collections import deque
-from zthon.core.logger import logging
-from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
-from . import ALIVE_NAME, deEmojify, mention
 
+from zthon import zedub
+
+from ..core.managers import edit_or_reply
+from . import mention
 
 plugin_category = "الترفيه"
 
@@ -299,20 +295,19 @@ async def _(event):
 
 
 Fun3_cmd = (
-"**Commands in animation1 are **"
-"  •  `.نجمه`"
-"  •  `.مكعبات`"
-"  •  `.مطر`"
-"  •  `.deploy`"
-"  •  `.تفريغ`"
-"  •  `.فليم`"
-"  •  `.احبك`"
-"  •  `.طائره`"
-"  •  `.شرطه`"
-"  •  `.jio`"
-"  •  `.النظام الشمسي`"
-  
-"**للنســخ : ** __اضغط ع الامـر لنسخـه__"
+    "**Commands in animation1 are **"
+    "  •  `.نجمه`"
+    "  •  `.مكعبات`"
+    "  •  `.مطر`"
+    "  •  `.deploy`"
+    "  •  `.تفريغ`"
+    "  •  `.فليم`"
+    "  •  `.احبك`"
+    "  •  `.طائره`"
+    "  •  `.شرطه`"
+    "  •  `.jio`"
+    "  •  `.النظام الشمسي`"
+    "**للنســخ : ** __اضغط ع الامـر لنسخـه__"
 )
 
 # Copyright (C) 2022 Zedthon . All Rights Reserved

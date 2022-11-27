@@ -5,7 +5,7 @@ from pathlib import Path
 from ..Config import Config
 from ..core import CMD_INFO, PLG_INFO
 from ..utils import load_module, remove_plugin
-from . import CMD_HELP, CMD_LIST, SUDO_LIST, zedub, edit_delete, edit_or_reply, reply_id
+from . import CMD_HELP, CMD_LIST, SUDO_LIST, edit_delete, edit_or_reply, reply_id, zedub
 
 plugin_category = "الادوات"
 
@@ -90,7 +90,6 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 
-
 @zedub.zed_cmd(
     pattern="حمل ([\s\S]*)",
     command=("حمل", plugin_category),
@@ -108,7 +107,9 @@ async def load(event):
         with contextlib.suppress(BaseException):
             remove_plugin(shortname)
         load_module(shortname)
-        await edit_delete(event, f"**- تـم تحميـل المـلف** {shortname} **.. بـ نجـاح ☑️**", 10)
+        await edit_delete(
+            event, f"**- تـم تحميـل المـلف** {shortname} **.. بـ نجـاح ☑️**", 10
+        )
     except Exception as e:
         await edit_or_reply(
             event,
@@ -163,7 +164,9 @@ async def unload(event):
         remove_plugin(shortname)
         await edit_or_reply(event, f"**- تم الغـاء تحميـل** {shortname} **.. بنجـاح✓**")
     except Exception as e:
-        await edit_or_reply(event, f"**- تم الغـاء تحميـل** {shortname} **.. بنجـاح✓**\n{e}")
+        await edit_or_reply(
+            event, f"**- تم الغـاء تحميـل** {shortname} **.. بنجـاح✓**\n{e}"
+        )
 
 
 @zedub.zed_cmd(
@@ -183,7 +186,8 @@ async def unload(event):
     path = plug_checker(shortname)
     if not os.path.exists(path):
         return await edit_delete(
-            event, f"**- عـذراً لا يـوجـد هنـاك مـلف بـ اسـم {shortname} لـ الغـاء تنصيبـه ؟!**"
+            event,
+            f"**- عـذراً لا يـوجـد هنـاك مـلف بـ اسـم {shortname} لـ الغـاء تنصيبـه ؟!**",
         )
     os.remove(path)
     if shortname in CMD_LIST:
@@ -194,9 +198,13 @@ async def unload(event):
         CMD_HELP.pop(shortname)
     try:
         remove_plugin(shortname)
-        await edit_or_reply(event, f"**- تـم الغـاء تنصيب المـلف** {shortname} **.. بـ نجـاح ☑️**")
+        await edit_or_reply(
+            event, f"**- تـم الغـاء تنصيب المـلف** {shortname} **.. بـ نجـاح ☑️**"
+        )
     except Exception as e:
-        await edit_or_reply(event, f"**- تـم الغـاء تنصيب المـلف** {shortname} **.. بـ نجـاح ☑️**\n{e}")
+        await edit_or_reply(
+            event, f"**- تـم الغـاء تنصيب المـلف** {shortname} **.. بـ نجـاح ☑️**\n{e}"
+        )
     if shortname in PLG_INFO:
         for cmd in PLG_INFO[shortname]:
             CMD_INFO.pop(cmd)

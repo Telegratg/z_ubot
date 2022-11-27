@@ -164,18 +164,22 @@ async def ffmpeg_compress(event):
         if os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
             media = (await fileinfo(FF_MPEG_DOWN_LOAD_MEDIA_PATH))["type"]
             if media not in ["Video"]:
-                return await edit_delete(event, "**- الامـر يدعـم فقـط ملفـات الفيـديـو . . .**")
+                return await edit_delete(
+                    event, "**- الامـر يدعـم فقـط ملفـات الفيـديـو . . .**"
+                )
             dlpath = FF_MPEG_DOWN_LOAD_MEDIA_PATH
-            zedevent = await edit_or_reply(event, "**- جـارِ ضغـط ملـف الفيـديـو . . .**")
+            zedevent = await edit_or_reply(
+                event, "**- جـارِ ضغـط ملـف الفيـديـو . . .**"
+            )
             delete = False
         else:
-            await edit_delete(
-                event, "**- بالـرد ع فيـديـو . . .**"
-            )
+            await edit_delete(event, "**- بالـرد ع فيـديـو . . .**")
     elif reply_message:
         media = media_type(reply_message)
         if media not in ["Video", "Round Video", "Gif"]:
-            return await edit_delete(event, "**- الامـر يدعـم فقـط ملفـات الفيـديـو . . .**")
+            return await edit_delete(
+                event, "**- الامـر يدعـم فقـط ملفـات الفيـديـو . . .**"
+            )
         zedevent = await edit_or_reply(event, "**- جـارِ حفـظ المـلف . . .**")
         try:
             c_time = time.time()

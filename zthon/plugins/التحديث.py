@@ -3,7 +3,6 @@ import contextlib
 import os
 import sys
 from asyncio.exceptions import CancelledError
-from time import sleep
 
 import heroku3
 import urllib3
@@ -15,7 +14,6 @@ from zthon import HEROKU_APP, UPSTREAM_REPO_URL, zedub
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _zedutils
 from ..sql_helper.global_collection import (
     add_to_collectionlist,
     del_keyword_collectionlist,
@@ -86,17 +84,23 @@ async def update_bot(event, repo, ups_rem, ac_br):
     except GitCommandError:
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
-    sandy = await event.edit(f"𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 **- تحـديثـات السـورس** 𓆪\n**•─────────────────•**\n\n**•⎆┊تم التحـديث ⎌ بنجـاح ☑️**\n**•⎆┊جـارِ إعـادة تشغيـل بـوت زدثــون ⎋ انتظـر مـن 2 - 1 دقيقـه . . .𓆰**")
+    sandy = await event.edit(
+        f"𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 **- تحـديثـات السـورس** 𓆪\n**•─────────────────•**\n\n**•⎆┊تم التحـديث ⎌ بنجـاح ☑️**\n**•⎆┊جـارِ إعـادة تشغيـل بـوت زدثــون ⎋ انتظـر مـن 2 - 1 دقيقـه . . .𓆰**"
+    )
     await event.client.reload(sandy)
 
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit(f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_API_KEY اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!𓆰**")
+        return await event.edit(
+            f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_API_KEY اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!𓆰**"
+        )
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
-        await event.edit(f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_APP_NAME اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!𓆰**")
+        await event.edit(
+            f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n **•─────────────────•**\n** ⪼ لم تقـم بوضـع مربـع فـار HEROKU_APP_NAME اثنـاء التنصيب وهـذا خطـأ .. قم بضبـط المتغيـر أولاً لتحديث بوت زدثــون ..؟!𓆰**"
+        )
         repo.__del__()
         return
     heroku_app = next(
@@ -109,7 +113,9 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             f"{txt}\n" "**- بيانات اعتماد هيروكو غير صالحة لتنصيب تحديث زدثــون**"
         )
         return repo.__del__()
-    sandy = await event.edit(f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يـرجى الانتظـار حتى تنتـهي العمليـة ⎋**\n**✾╎عادة ما يستغرق هـذا التحديث من 5 - 4 دقائـق 📟**")
+    sandy = await event.edit(
+        f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يـرجى الانتظـار حتى تنتـهي العمليـة ⎋**\n**✾╎عادة ما يستغرق هـذا التحديث من 5 - 4 دقائـق 📟**"
+    )
     try:
         ulist = get_collectionlist_items()
         for i in ulist:
@@ -169,12 +175,16 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 async def upstream(event):
     "To check if the bot is up to date and update if specified"
     conf = event.pattern_match.group(1).strip()
-    event = await edit_or_reply(event, f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n**⪼ جاري البحث عن التحديثات  🌐.. 𓆰،**")
+    event = await edit_or_reply(
+        event,
+        f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n**⪼ جاري البحث عن التحديثات  🌐.. 𓆰،**",
+    )
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     if ENV and (HEROKU_API_KEY is None or HEROKU_APP_NAME is None):
         return await edit_or_reply(
-            event, f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n** ⪼ اضبط الفـارات المطلوبة أولاً لتحديث بوت زدثــون 𓆰،**"
+            event,
+            f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n** ⪼ اضبط الفـارات المطلوبة أولاً لتحديث بوت زدثــون 𓆰،**",
         )
     try:
         txt = (
@@ -224,33 +234,58 @@ async def upstream(event):
         )
         return repo.__del__()
     if conf == "" and not force_update:
-        return await edit_or_reply(event, f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**•⎆┊يوجـد تحـديث جديـد لسـورس زدثــون ༗...**\n\n**•⎆┊للتحديث السريع اضغـط هنـا ⇜** ⦉ `{cmdhd}تحديث الان` ⦊ \n**•⎆┊للتحديث الجـذري اضغـط هنـا ⇜** ⦉ `{cmdhd}تحديث البوت` ⦊ \n\n𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿](t.me/ZedThon) 𓆪")
+        return await edit_or_reply(
+            event,
+            f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**•⎆┊يوجـد تحـديث جديـد لسـورس زدثــون ༗...**\n\n**•⎆┊للتحديث السريع اضغـط هنـا ⇜** ⦉ `{cmdhd}تحديث الان` ⦊ \n**•⎆┊للتحديث الجـذري اضغـط هنـا ⇜** ⦉ `{cmdhd}تحديث البوت` ⦊ \n\n𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿](t.me/ZedThon) 𓆪",
+        )
     if force_update:
         await event.edit(
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     if conf == "الان":
-        await event.edit(f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**")
+        await event.edit(
+            f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟷𝟶 ▬▭▭▭▭▭▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟷𝟶 ▬▭▭▭▭▭▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟸𝟶 ▬▬▭▭▭▭▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟸𝟶 ▬▬▭▭▭▭▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟹𝟶 ▬▬▬▭▭▭▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟹𝟶 ▬▬▬▭▭▭▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟺𝟶 ▬▬▬▬▭▭▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟺𝟶 ▬▬▬▬▭▭▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟻𝟶 ▬▬▬▬▬▭▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟻𝟶 ▬▬▬▬▬▭▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟼𝟶 ▬▬▬▬▬▬▭▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟼𝟶 ▬▬▬▬▬▬▭▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟽𝟶 ▬▬▬▬▬▬▬▭▭▭")
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟽𝟶 ▬▬▬▬▬▬▬▭▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟾𝟶 ▬▬▬▬▬▬▬▬▭▭") 
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟾𝟶 ▬▬▬▬▬▬▬▬▭▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟿𝟶 ▬▬▬▬▬▬▬▬▬▭") 
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟿𝟶 ▬▬▬▬▬▬▬▬▬▭"
+        )
         await asyncio.sleep(1)
-        await event.edit("𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟷𝟶𝟶 ▬▬▬▬▬▬▬▬▬▬💯") 
+        await event.edit(
+            "𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⇜ يتـم تحـديث بـوت زدثــون .. انتظـر . . .🌐𓆰**\n\n%𝟷𝟶𝟶 ▬▬▬▬▬▬▬▬▬▬💯"
+        )
         await update_bot(event, repo, ups_rem, ac_br)
     return
 
@@ -269,7 +304,10 @@ async def upstream(event):
             event,
             f"I guess you are on selfhost. For self host you need to use `{cmdhd}update now`",
         )
-    event = await edit_or_reply(event, f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⪼ يتم تنصيب التحديث  انتظر 🌐 𓆰،**")
+    event = await edit_or_reply(
+        event,
+        f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**⪼ يتم تنصيب التحديث  انتظر 🌐 𓆰،**",
+    )
     off_repo = "https://github.com/Zed-Thon/nekopack"
     os.chdir("/app")
     try:
@@ -297,7 +335,7 @@ async def upstream(event):
     ac_br = repo.active_branch.name
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
-    await event.edit(f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يـرجى الانتظـار حتى تنتـهي العمليـة ⎋**\n**✾╎عادة ما يستغرق هـذا التحديث من 5 - 4 دقائـق 📟**")
+    await event.edit(
+        f"𓆩 [𝙎𝙊𝙐𝙍𝘾𝞝 𝙕𝞝𝘿 - تحـديثـات السـورس](t.me/ZedThon) 𓆪\n**•─────────────────•**\n\n**✾╎جـارِ . . تنصـيب التحـديث الجـذري ⎌**\n**✾╎يـرجى الانتظـار حتى تنتـهي العمليـة ⎋**\n**✾╎عادة ما يستغرق هـذا التحديث من 5 - 4 دقائـق 📟**"
+    )
     await deploy(event, repo, ups_rem, ac_br, txt)
-
-

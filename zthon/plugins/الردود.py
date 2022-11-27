@@ -51,6 +51,7 @@ ZelzalWF_cmd = (
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalWF_cmd)
 
+
 @zedub.zed_cmd(pattern="الترحيب")
 async def cmd(zelzallll):
     await edit_or_reply(zelzallll, ZelzalWF_cmd)
@@ -235,6 +236,9 @@ async def on_all_snip_delete(event):
     filters = get_filters(event.chat_id)
     if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, "𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 - 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑭𝑰𝑳𝑻𝑬𝑹𝑺 𓆪\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n**⪼ تم حذف جـميع الــردود المضـافـهہ بنجـاح☑️**")
+        await edit_or_reply(
+            event,
+            "𓆩 𝑺𝑶𝑼𝑹𝑪𝑬 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 - 𝙕𝞝𝘿𝙏𝙃𝙊𝙉 𝑭𝑰𝑳𝑻𝑬𝑹𝑺 𓆪\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n**⪼ تم حذف جـميع الــردود المضـافـهہ بنجـاح☑️**",
+        )
     else:
         await edit_or_reply(event, "**❈╎عـذراً .. لا توجـد ردود في هـذه المجموعـه**")

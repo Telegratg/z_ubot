@@ -70,7 +70,6 @@ async def _(event):  # sourcery no-metrics
             await zedevent.edit(i, parse_mode=_format.parse_pre)
 
 
-
 @zedub.zed_cmd(
     pattern="الاسماء(المعرف)?(?:\s|$)([\s\S]*)",
     command=("الاسماء", plugin_category),

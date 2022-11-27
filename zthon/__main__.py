@@ -1,7 +1,6 @@
 import contextlib
 import sys
 
-import zthon
 from zthon import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
 from .Config import Config

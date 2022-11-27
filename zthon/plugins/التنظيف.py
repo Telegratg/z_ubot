@@ -64,7 +64,8 @@ async def delete_it(event):
                 await msg_src.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 if BOTLOG:
@@ -81,7 +82,8 @@ async def delete_it(event):
                 await event.delete()
                 if BOTLOG:
                     await event.client.send_message(
-                        BOTLOG_CHATID, "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**"
+                        BOTLOG_CHATID,
+                        "#الحـذف \n\n**- تـم حـذف الرسـالة .. بـ نجـاح ☑️**",
                     )
             except rpcbaseerrors.BadRequestError:
                 await edit_or_reply(event, "**- عـذرا لا استـطيع حـذف هـذه الرسـالة**")
@@ -193,7 +195,9 @@ async def purgeme(event):
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#حـذف_رسـائلي \n\n**❈╎تـم حـذف** " + str(count) + " **رسـالـة . . بنجـاح ☑️**",
+            "#حـذف_رسـائلي \n\n**❈╎تـم حـذف** "
+            + str(count)
+            + " **رسـالـة . . بنجـاح ☑️**",
         )
     await sleep(5)
     await smsg.delete()
@@ -421,7 +425,9 @@ async def fastpurger(event):  # sourcery no-metrics
                 if msgs:
                     await event.client.delete_messages(chat, msgs)
             elif ty == "كلمه":
-                error += "\n✾╎لا تستطـيع استـخدام امر التنظيف عبر البحث مع الكلمـه المضـاف"
+                error += (
+                    "\n✾╎لا تستطـيع استـخدام امر التنظيف عبر البحث مع الكلمـه المضـاف"
+                )
 
             else:
                 error += f"\n✾╎`{ty}`  : هـذه الكلمـه المضـافه خاطئـة "
@@ -439,7 +445,9 @@ async def fastpurger(event):  # sourcery no-metrics
     if msgs:
         await event.client.delete_messages(chat, msgs)
     if count > 0:
-        result += "✾╎اكـتمل الـتنظيف السـريع\n✾╎تـم حـذف  " + str(count) + "من الـرسائل "
+        result += (
+            "✾╎اكـتمل الـتنظيف السـريع\n✾╎تـم حـذف  " + str(count) + "من الـرسائل "
+        )
     if error != "":
         result += f"\n\n**خـطأ:**{error}"
     if result == "":

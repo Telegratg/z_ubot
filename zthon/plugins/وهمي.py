@@ -1,20 +1,18 @@
-import os
 import asyncio
 import time
 
 import aiohttp
-from telethon.errors import ChatAdminRequiredError as no_admin
-from telethon.tl.functions.messages import ExportChatInviteRequest
 
 from zthon import zedub
 
-from ..helpers import get_user_from_event
 from . import *
 
 
 @zedub.zed_cmd(pattern="الطقس(?: |$)(.*)")
 async def _(event):
-    await edit_or_reply(event, "**- ارسـل .طقس + اسـم المدينـة**\n\n**- مثــال :**\n.طقس بغداد")
+    await edit_or_reply(
+        event, "**- ارسـل .طقس + اسـم المدينـة**\n\n**- مثــال :**\n.طقس بغداد"
+    )
 
 
 @zedub.zed_cmd(pattern="طقس (.*)")
@@ -131,4 +129,3 @@ async def _(event):
     await event.edit(f"**⎆┊تم بدء وضع اللعب الوهمي لـ {t} من الثوانـي ✓**")
     async with event.client.action(event.chat_id, "game"):
         await asyncio.sleep(t)
-

@@ -1,6 +1,6 @@
 # ZedThon - zthon
 # Copyright (C) 2022 ZedThon . All Rights Reserved
-#< https://t.me/ZedThon >
+# < https://t.me/ZedThon >
 # This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/Zed-Thon/ZelZal/blob/master/LICENSE/>.
@@ -9,17 +9,10 @@ import asyncio
 import glob
 import os
 import sys
-import urllib.request
 from datetime import timedelta
 from pathlib import Path
 
 from telethon import Button, functions, types, utils
-from telethon.errors import (
-    BotMethodInvalidError,
-    ChannelPrivateError,
-    ChannelsTooMuchError,
-)
-from telethon.tl.functions.channels import JoinChannelRequest
 
 from zthon import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
@@ -27,7 +20,6 @@ from ..Config import Config
 from ..core.logger import logging
 from ..core.session import zedub
 from ..helpers.utils import install_pip
-from ..helpers.utils.utils import runcmd
 from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
     get_item_collectionlist,
@@ -153,16 +145,21 @@ async def mybot():
             await asyncio.sleep(1)
             await zedub.send_message("@BotFather", botname)
             await asyncio.sleep(1)
-            await zedub.send_message("@BotFather", f"- بـوت زدثــون المسـاعـد ♥️🦾 الخـاص بـ  {bot.me.first_name} ")
+            await zedub.send_message(
+                "@BotFather",
+                f"- بـوت زدثــون المسـاعـد ♥️🦾 الخـاص بـ  {bot.me.first_name} ",
+            )
             await asyncio.sleep(3)
             await zedub.send_message("@BotFather", "/setdescription")
             await asyncio.sleep(1)
             await zedub.send_message("@BotFather", botname)
             await asyncio.sleep(1)
-            await zedub.send_message("@BotFather", f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @ZedThon 🌐")
+            await zedub.send_message(
+                "@BotFather",
+                f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @ZedThon 🌐",
+            )
         except Exception as e:
             print(e)
-
 
 
 async def add_bot_to_logger_group(chat_id):
@@ -250,7 +247,6 @@ async def load_plugins(folder, extfolder=None):
         )
 
 
-
 async def verifyLoggerGroup():
     """
     التاكد من مجموعة التخزين
@@ -278,8 +274,7 @@ async def verifyLoggerGroup():
             )
         except Exception as e:
             LOGS.error(
-                "حدث خطأ عند محاولة التحقق من فار PRIVATE_GROUP_BOT_API_ID.\n"
-                + str(e)
+                "حدث خطأ عند محاولة التحقق من فار PRIVATE_GROUP_BOT_API_ID.\n" + str(e)
             )
     else:
         descript = "لا تقم بحذف هذه المجموعة أو التغيير إلى مجموعة عامه (وظيفتهـا تخزيـن كـل سجـلات وعمليـات البـوت.)"
@@ -299,9 +294,13 @@ async def verifyLoggerGroup():
                 if entity.default_banned_rights.invite_users:
                     LOGS.info("لا توجد صلاحيات كافية لاضافة الاعضاء في مجموعة التخزين")
         except ValueError:
-            LOGS.info("لم يتم العثور على ايدي مجموعة التخزين تاكد من انه مكتوب بشكل صحيح ")
+            LOGS.info(
+                "لم يتم العثور على ايدي مجموعة التخزين تاكد من انه مكتوب بشكل صحيح "
+            )
         except TypeError:
-            LOGS.error("صيغه ايدي مجموعة التخزين غير صالحة.تاكد من انه مكتوب بشكل صحيح ")
+            LOGS.error(
+                "صيغه ايدي مجموعة التخزين غير صالحة.تاكد من انه مكتوب بشكل صحيح "
+            )
         except Exception as e:
             LOGS.error("حدث خطأ اثناء التعرف على مجموعة التخزين\n" + str(e))
     else:

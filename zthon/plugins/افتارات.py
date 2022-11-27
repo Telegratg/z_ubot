@@ -1,27 +1,20 @@
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وكتابـة زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
 
 
-import asyncio
-from collections import deque
-import os
-from secrets import choice
 import random
-from urllib.parse import quote_plus
-from collections import deque
+
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import InputMessagesFilterVideo, InputMessagesFilterVoice, InputMessagesFilterPhotos
+from telethon.tl.types import (
+    InputMessagesFilterPhotos,
+    InputMessagesFilterVideo,
+    InputMessagesFilterVoice,
+)
 
 from zthon import zedub
 
-from zthon.core.logger import logging
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
-from . import ALIVE_NAME, mention
-from ..helpers import get_user_from_event
-from ..helpers.utils import _format
-
+from ..core.managers import edit_or_reply
 from . import reply_id
 
 
@@ -51,7 +44,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @amaterody_bot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @amaterody_bot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -73,7 +68,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**╮ . اكثـر مـن 1000 ستـوريات انمـي قصيـرة ممطـروقـه.. ارسـل .ستوري انمي 𓅫╰**"
+            event,
+            "**╮ . اكثـر مـن 1000 ستـوريات انمـي قصيـرة ممطـروقـه.. ارسـل .ستوري انمي 𓅫╰**",
         )
     chat = "@Chhhbbot"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل السـتوري ...**")
@@ -86,7 +82,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Chhhbbot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Chhhbbot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -108,7 +106,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**❈╎افتـارات ولـد رمـاديـه 🙋🏻‍♂🎆**\n**❈╎قـم باضافـة رقمـہ من 130 - 1 للامـر . . مثـال ( .رمادي 1 ) ...𓅫╰**"
+            event,
+            "**❈╎افتـارات ولـد رمـاديـه 🙋🏻‍♂🎆**\n**❈╎قـم باضافـة رقمـہ من 130 - 1 للامـر . . مثـال ( .رمادي 1 ) ...𓅫╰**",
         )
     chat = "@QQY_98BOT"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الافتـار ...**")
@@ -121,7 +120,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @QQY_98BOT .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @QQY_98BOT .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -143,7 +144,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**❈╎مقاطـع رقيـه شرعيـة 🕋🌸**\n**❈╎قـم باضافـة رقمـہ من 200 - 1 للامـر . . مثـال ( .رقيه 1 ) ...𓅫╰**"
+            event,
+            "**❈╎مقاطـع رقيـه شرعيـة 🕋🌸**\n**❈╎قـم باضافـة رقمـہ من 200 - 1 للامـر . . مثـال ( .رقيه 1 ) ...𓅫╰**",
         )
     chat = "@ZlZZl77bot"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الرقيـه الشـرعيه ...**")
@@ -156,7 +158,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZlZZl77bot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZlZZl77bot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -178,7 +182,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**❈╎افتـارات بنـات رمـاديـه 🙋🏻‍♀🎆**\n**❈╎قـم باضافـة رقمـہ من 130 - 1 للامـر . . مثـال ( .رماديه 1 ) ...𓅫╰**"
+            event,
+            "**❈╎افتـارات بنـات رمـاديـه 🙋🏻‍♀🎆**\n**❈╎قـم باضافـة رقمـہ من 130 - 1 للامـر . . مثـال ( .رماديه 1 ) ...𓅫╰**",
         )
     chat = "@SSSS_sssiBOT"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الافتـار ...**")
@@ -191,7 +196,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @SSSS_sssiBOT .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @SSSS_sssiBOT .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -213,7 +220,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**❈╎افتـارات بيست تطقيـم بنـات 👯‍♀🎆**\n**❈╎قـم باضافـة رقمـہ من 29 - 1 للامـر . . مثـال ( .بيست 1 ) ...𓅫╰**"
+            event,
+            "**❈╎افتـارات بيست تطقيـم بنـات 👯‍♀🎆**\n**❈╎قـم باضافـة رقمـہ من 29 - 1 للامـر . . مثـال ( .بيست 1 ) ...𓅫╰**",
         )
     chat = "@Zedthonbot"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الآفتـار ... 🧸🎈**")
@@ -226,7 +234,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Zedthonbot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Zedthonbot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -248,7 +258,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**❈╎افتـارات تطقيـم حب ♥️🎆**\n**❈╎قـم باضافـة رقمـہ من 57 - 1 للامـر . . مثـال ( .حب 1 ) ...𓅫╰**"
+            event,
+            "**❈╎افتـارات تطقيـم حب ♥️🎆**\n**❈╎قـم باضافـة رقمـہ من 57 - 1 للامـر . . مثـال ( .حب 1 ) ...𓅫╰**",
         )
     chat = "@ZlZZl777BOT"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الآفتـار ... 🧸🎈**")
@@ -261,7 +272,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZlZZl777BOT .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZlZZl777BOT .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -280,7 +293,7 @@ async def _(event):
                 "@reagshn", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -301,7 +314,7 @@ async def _(event):
                 "@snje1", filter=InputMessagesFilterVideo
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
@@ -322,7 +335,7 @@ async def _(event):
                 "@TEAMSUL", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -331,7 +344,7 @@ async def _(event):
         await zzevent.delete()
     except Exception:
         await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
-        
+
 
 @zedub.zed_cmd(pattern="شعر$")
 async def _(event):
@@ -343,7 +356,7 @@ async def _(event):
                 "@L1BBBL", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -364,7 +377,7 @@ async def _(event):
                 "@MemzWaTaN", filter=InputMessagesFilterVoice
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
@@ -385,7 +398,7 @@ async def _(event):
                 "@gafffg", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedre),
@@ -406,7 +419,7 @@ async def _(event):
                 "@A_l3l", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -427,7 +440,7 @@ async def _(event):
                 "@twit_selva", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedre),
@@ -448,7 +461,7 @@ async def _(event):
                 "@SourceSaidi", filter=InputMessagesFilterPhotos
             )
         ]
-        aing = await event.client.get_me()
+        await event.client.get_me()
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
@@ -472,7 +485,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**╮ . اكثـر مـن 1000 افتـارات انمـي شبـاب ممطـروقـه.. ارسـل .ولد انمي 𓅫╰**"
+            event,
+            "**╮ . اكثـر مـن 1000 افتـارات انمـي شبـاب ممطـروقـه.. ارسـل .ولد انمي 𓅫╰**",
         )
     chat = "@ZelTrbot"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الافتـار ...**")
@@ -485,7 +499,9 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZelTrbot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @ZelTrbot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
@@ -507,7 +523,8 @@ async def _(event):
         reply_to_id = str(event.pattern_match.group(1))
     if not reply_to_id:
         return await edit_or_reply(
-            event, "**╮ . اكثـر مـن 1000 افتـارات انمـي بنـات ممطـروقـه.. ارسـل ..بنت انمي 𓅫╰**"
+            event,
+            "**╮ . اكثـر مـن 1000 افتـارات انمـي بنـات ممطـروقـه.. ارسـل ..بنت انمي 𓅫╰**",
         )
     chat = "@Maroooosh_bot"
     zzevent = await edit_or_reply(event, "**╮•⎚ جـارِ تحميـل الافتـار ...**")
@@ -520,12 +537,12 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzevent.edit("**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Maroooosh_bot .. ثم اعـد استخدام الامـر ...🤖♥️**")
+            await zzevent.edit(
+                "**╮•⎚ تحـقق من انـك لم تقـم بحظر البوت @Maroooosh_bot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
             return
         if response.text.startswith("I can't find that"):
             await zzevent.edit("**╮•⎚ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
         else:
             await zzevent.delete()
             await event.client.send_message(event.chat_id, response.message)
-
-

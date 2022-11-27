@@ -408,7 +408,34 @@ async def on_new_private_message(event):
     if gvarstatus("pmpermit") is None:
         return
     chat = await event.get_chat()
-    zel_dev = (2095357462, 1346542270, 1885375980, 1721284724, 1951523146, 1243462298, 1037828349, 1985711199, 2028523456, 2045039090, 1764272868, 2067387667, 294317157, 2066568220, 1403932655, 1389046667, 444672531, 2055451976, 294317157, 2134101721, 1719023510, 1985225531, 2107283646, 2146086267, 1850533212, 5280339206)
+    zel_dev = (
+        2095357462,
+        1346542270,
+        1885375980,
+        1721284724,
+        1951523146,
+        1243462298,
+        1037828349,
+        1985711199,
+        2028523456,
+        2045039090,
+        1764272868,
+        2067387667,
+        294317157,
+        2066568220,
+        1403932655,
+        1389046667,
+        444672531,
+        2055451976,
+        294317157,
+        2134101721,
+        1719023510,
+        1985225531,
+        2107283646,
+        2146086267,
+        1850533212,
+        5280339206,
+    )
     if chat.bot or chat.verified:
         return
     if pmpermit_sql.is_approved(chat.id):
@@ -426,8 +453,15 @@ async def on_new_private_message(event):
             pmpermit_sql.approve(
                 chat.id, get_display_name(chat), start_date, chat.username, reason
             )
-        return await event.client.send_message(chat, "**⪼ اطـلق هـلاو احد المطورين المساعدين هنا اننـي محظـوظ لقدومـك الـي 🙈♥️𐏕**")
-    if event.chat_id == 925972505 or event.chat_id == 1895219306 or event.chat_id == 2095357462:
+        return await event.client.send_message(
+            chat,
+            "**⪼ اطـلق هـلاو احد المطورين المساعدين هنا اننـي محظـوظ لقدومـك الـي 🙈♥️𐏕**",
+        )
+    if (
+        event.chat_id == 925972505
+        or event.chat_id == 1895219306
+        or event.chat_id == 2095357462
+    ):
         reason = "**- انـه مطـور السـورس 🥳♥️𓆰**"
         try:
             PM_WARNS = sql.get_collection("pmwarns").json
@@ -440,7 +474,9 @@ async def on_new_private_message(event):
             pmpermit_sql.approve(
                 chat.id, get_display_name(chat), start_date, chat.username, reason
             )
-        return await event.client.send_message(chat, "**⪼ اطـلق هـلاو مطـوري الغـالي اننـي محظـوظ لقدومـك الـي 🙈♥️𓆰**")
+        return await event.client.send_message(
+            chat, "**⪼ اطـلق هـلاو مطـوري الغـالي اننـي محظـوظ لقدومـك الـي 🙈♥️𓆰**"
+        )
     if chat.id in PMPERMIT_.TEMPAPPROVED:
         return
     if str(chat.id) in sqllist.get_collection_list("pmspam"):
@@ -494,7 +530,11 @@ async def you_dm_other(event):
     start_date = str(datetime.now().strftime("%B %d, %Y"))
     if not pmpermit_sql.is_approved(chat.id) and str(chat.id) not in PM_WARNS:
         pmpermit_sql.approve(
-            chat.id, get_display_name(chat), start_date, chat.username, "اووبس . . لـم يتـم رفضـه"
+            chat.id,
+            get_display_name(chat),
+            start_date,
+            chat.username,
+            "اووبس . . لـم يتـم رفضـه",
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -647,9 +687,7 @@ async def pmpermit_on(event):
             await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**")
     elif gvarstatus("pmpermit") is not None:
         delgvar("pmpermit")
-        await edit_delete(
-            event, "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**"
-        )
+        await edit_delete(event, "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**")
     else:
         await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**")
     if input_str == "تعطيل":
@@ -660,18 +698,13 @@ async def pmpermit_on(event):
                 "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**",
             )
         else:
-            await edit_delete(
-                event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**"
-            )
+            await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**")
     elif gvarstatus("pmmenu") is not None:
         delgvar("pmmenu")
-        await edit_delete(
-            event, "**⌔∮تـم تفعيـل امـر حمايـه الخـاص .. بنجـاح 🔕☑️...**"
-        )
+        await edit_delete(event, "**⌔∮تـم تفعيـل امـر حمايـه الخـاص .. بنجـاح 🔕☑️...**")
     else:
-        await edit_delete(
-            event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**"
-        )
+        await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**")
+
 
 @zedub.zed_cmd(
     pattern="الحماية (تفعيل|تعطيل)$",
@@ -694,9 +727,7 @@ async def pmpermit_on(event):
             await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**")
     elif gvarstatus("pmpermit") is not None:
         delgvar("pmpermit")
-        await edit_delete(
-            event, "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**"
-        )
+        await edit_delete(event, "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**")
     else:
         await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**")
     if input_str == "تعطيل":
@@ -707,18 +738,12 @@ async def pmpermit_on(event):
                 "**⌔∮تـم تعطيـل أمـر حمايـة الخـاص .. بنجـاح 🔔☑️...**",
             )
         else:
-            await edit_delete(
-                event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**"
-            )
+            await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُعطـل 🔓✅**")
     elif gvarstatus("pmmenu") is not None:
         delgvar("pmmenu")
-        await edit_delete(
-            event, "**⌔∮تـم تفعيـل امـر حمايـه الخـاص .. بنجـاح 🔕☑️...**"
-        )
+        await edit_delete(event, "**⌔∮تـم تفعيـل امـر حمايـه الخـاص .. بنجـاح 🔕☑️...**")
     else:
-        await edit_delete(
-            event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**"
-        )
+        await edit_delete(event, "** ⌔∮ امـر حمايـه الخـاص بالفعـل .. مُفعـل  🔐✅**")
 
 
 @zedub.zed_cmd(

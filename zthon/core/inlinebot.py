@@ -13,7 +13,6 @@ from youtubesearchpython import VideosSearch
 
 from zthon import zedub
 
-from ..assistant.inlinefm import get_manager
 from ..Config import Config
 from ..helpers.functions import rand_key
 from ..helpers.functions.utube import (
@@ -61,9 +60,7 @@ def main_menu():
         buttons = [
             (Button.inline("ℹ️ معلومـات الملفـات", data="check"),),
             (
-                Button.inline(
-                    f"ملفات الادمن 👮‍ ", data="admin_menu"
-                ),
+                Button.inline(f"ملفات الادمن 👮‍ ", data="admin_menu"),
                 Button.inline(f"ملفات البوت 🤖", data="bot_menu"),
             ),
             (
@@ -76,9 +73,7 @@ def main_menu():
             ),
             (
                 Button.inline(f"البـحـث والتحميـل 🪄", data="extra_menu"),
-                Button.inline(
-                    f"آخرى 🖨", data="useless_menu"
-                ),
+                Button.inline(f"آخرى 🖨", data="useless_menu"),
             ),
             (Button.inline("🔒 اغـلاق اللوحـه", data="close"),),
         ]
@@ -86,9 +81,7 @@ def main_menu():
         buttons = [
             (Button.inline("ℹ️ معلومـات الملفـات", data="check"),),
             (
-                Button.inline(
-                    f"ملفات الادمن 👮‍ ", data="admin_menu"
-                ),
+                Button.inline(f"ملفات الادمن 👮‍ ", data="admin_menu"),
                 Button.inline(f"ملفات البوت 🤖", data="bot_menu"),
             ),
             (
@@ -259,8 +252,14 @@ async def inline_handler(event):  # sourcery no-metrics
                     Button.url("𝗭𝗧𝗵𝗼𝗻™ 𓅛", "https://t.me/ZedThon"),
                 )
             ]
-            ALIVE_PIC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/f821d27af168206b472ad.mp4"
-            IALIVE_PIC = gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/f821d27af168206b472ad.mp4"
+            ALIVE_PIC = (
+                gvarstatus("ALIVE_PIC")
+                or "https://telegra.ph/file/f821d27af168206b472ad.mp4"
+            )
+            IALIVE_PIC = (
+                gvarstatus("IALIVE_PIC")
+                or "https://telegra.ph/file/f821d27af168206b472ad.mp4"
+            )
             if IALIVE_PIC:
                 ZED = [x for x in IALIVE_PIC.split()]
                 PIC = list(ZED)

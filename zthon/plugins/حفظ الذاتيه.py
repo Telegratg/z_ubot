@@ -1,18 +1,15 @@
-import os
-import shutil
 from asyncio import sleep
 
 from zthon import zedub
-
-from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from ..sql_helper.echo_sql import addecho, get_all_echos, get_echos, is_echo, remove_all_echos, remove_echo, remove_echos
-
 from zthon.core.logger import logging
-from . import BOTLOG, BOTLOG_CHATID
+
+from ..sql_helper.globals import gvarstatus
+
 plugin_category = "الادوات"
 LOGS = logging.getLogger(__name__)
 
 POSC = gvarstatus("Z_POSC") or "(مم|ذاتية|ذاتيه|جلب الوقتيه)"
+
 
 @zedub.zed_cmd(pattern=f"{POSC}(?: |$)(.*)")
 async def oho(event):
@@ -20,7 +17,9 @@ async def oho(event):
         return await event.edit("**- ❝ ⌊بالـرد علـى صورة ذاتيـة التدميـر 𓆰...**")
     zzzzl1l = await event.get_reply_message()
     pic = await zzzzl1l.download_media()
-    await zedub.send_file("me", pic, caption=f"**- ❝ ⌊تـم حفـظ الصـورة ذاتيـة التدمير بنجـاح ☑️ 🥳𓆰...**")
+    await zedub.send_file(
+        "me", pic, caption=f"**- ❝ ⌊تـم حفـظ الصـورة ذاتيـة التدمير بنجـاح ☑️ 🥳𓆰...**"
+    )
     await event.delete()
 
 

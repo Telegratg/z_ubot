@@ -89,9 +89,7 @@ async def log_tagged_messages(event):
     messaget = await media_type(event)
     resalt = f"#التــاكــات\n\n<b>⌔┊الكــروب : </b><code>{hmm.title}</code>"
     if full is not None:
-        resalt += (
-            f"\n\n<b>⌔┊المـرسـل : </b> {_format.htmlmentionuser(full.first_name , full.id)}"
-        )
+        resalt += f"\n\n<b>⌔┊المـرسـل : </b> {_format.htmlmentionuser(full.first_name , full.id)}"
     if messaget is not None:
         resalt += f"\n\n<b>⌔┊رسـالـة ميـديـا : </b><code>{messaget}</code>"
     else:
@@ -127,11 +125,15 @@ async def log(log_text):
             textx = user + log_text.pattern_match.group(1)
             await log_text.client.send_message(BOTLOG_CHATID, textx)
         else:
-            await log_text.edit("**⌔┊بالــرد على اي رسـاله لحفظهـا في كـروب التخــزين**")
+            await log_text.edit(
+                "**⌔┊بالــرد على اي رسـاله لحفظهـا في كـروب التخــزين**"
+            )
             return
         await log_text.edit("**⌔┊تـم الحفـظ في كـروب التخـزين .. بنجـاح ✓**")
     else:
-        await log_text.edit("**⌔┊عـذراً .. هـذا الامـر يتطلـب تفعيـل فـار التخـزين اولاً**")
+        await log_text.edit(
+            "**⌔┊عـذراً .. هـذا الامـر يتطلـب تفعيـل فـار التخـزين اولاً**"
+        )
     await asyncio.sleep(2)
     await log_text.delete()
 

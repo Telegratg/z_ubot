@@ -1,21 +1,17 @@
-#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
-#الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
+# 𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# الملـف حقـوق وتعديـل زلـزال الهيبـه ⤶ @zzzzl1l خاص بسـورس ⤶ 𝙕𝙚𝙙𝙏𝙝𝙤𝙣
 
 import asyncio
 import base64
 import io
-import logging
 import os
 import time
-from datetime import datetime
 from io import BytesIO
 from shutil import copyfile
 
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
 from pymediainfo import MediaInfo
-from telethon import functions, types
+from telethon import types
 from telethon.errors import PhotoInvalidDimensionsError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.functions.messages import SendMediaRequest
@@ -24,7 +20,6 @@ from telethon.utils import get_attributes
 from zthon import zedub
 
 from ..Config import Config
-from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import media_type, progress, thumb_from_audio
 from ..helpers.functions import (
@@ -36,7 +31,7 @@ from ..helpers.functions import (
     ud_frames,
     vid_to_gif,
 )
-from ..helpers.utils import _zedtools, _zedutils, _format
+from ..helpers.utils import _format, _zedtools, _zedutils
 from . import make_gif
 
 plugin_category = "الادوات"
@@ -204,17 +199,13 @@ async def video_catfile(event):  # sourcery no-metrics
             return await edit_delete(
                 catevent, "`No thumb found to make it video note`", 5
             )
-    if (
-        mediatype
-        in [
-            "Voice",
-            "Audio",
-            "Gif",
-            "Video",
-            "Sticker",
-        ]
-        and not catfile.endswith((".webp"))
-    ):
+    if mediatype in [
+        "Voice",
+        "Audio",
+        "Gif",
+        "Video",
+        "Sticker",
+    ] and not catfile.endswith((".webp")):
         if os.path.exists(PATH):
             c_time = time.time()
             attributes, mime_type = get_attributes(PATH)
@@ -395,7 +386,9 @@ async def pic_gifcmd(event):
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
-        return await edit_delete(event, "**╮ بالـرد ﮼؏ صـورة او ملصـق للتحـويل لمتحركـه ...𓅫╰**")
+        return await edit_delete(
+            event, "**╮ بالـرد ﮼؏ صـورة او ملصـق للتحـويل لمتحركـه ...𓅫╰**"
+        )
     if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
         return await edit_delete(
             event,
@@ -407,7 +400,8 @@ async def pic_gifcmd(event):
     imag = await _zedtools.media_to_pic(event, reply)
     if imag[1] is None:
         return await edit_delete(
-            imag[0], "**- اووبـس .. تعذر استخراج الصورة من الرسالة التي تم الرد عليها..**"
+            imag[0],
+            "**- اووبـس .. تعذر استخراج الصورة من الرسالة التي تم الرد عليها..**",
         )
     image = Image.open(imag[1])
     w, h = image.size
@@ -437,7 +431,8 @@ async def pic_gifcmd(event):
     output = await vid_to_gif("Output.gif", final)
     if output is None:
         await edit_delete(
-            catevent, "**- هناك خطـأ ما في الصـورة .. لا يمكنني تحويلهـا إلى متحركـة ؟! **"
+            catevent,
+            "**- هناك خطـأ ما في الصـورة .. لا يمكنني تحويلهـا إلى متحركـة ؟! **",
         )
         for i in [final, "Output.gif", imag[1]]:
             if os.path.exists(i):
@@ -456,7 +451,9 @@ async def _(event):
     reply = await event.get_reply_message()
     mediatype = media_type(event)
     if mediatype and mediatype != "video":
-        return await edit_delete(event, "**╮ بالـرد ﮼؏ فيديـو للتحـويل لمتحركـه ...𓅫╰**")
+        return await edit_delete(
+            event, "**╮ بالـرد ﮼؏ فيديـو للتحـويل لمتحركـه ...𓅫╰**"
+        )
     args = event.pattern_match.group(1)
     if not args:
         args = 2.0
@@ -465,7 +462,9 @@ async def _(event):
             args = float(args)
         except ValueError:
             args = 2.0
-    catevent = await edit_or_reply(event, "**╮ جـاري تحويل الفيديـو ✓ لمتحـركـه ﮼الـرجاء الانتظـار ...🎞🎆╰**")
+    catevent = await edit_or_reply(
+        event, "**╮ جـاري تحويل الفيديـو ✓ لمتحـركـه ﮼الـرجاء الانتظـار ...🎞🎆╰**"
+    )
     inputfile = await reply.download_media()
     outputfile = os.path.join(Config.TEMP_DIR, "vidtogif.gif")
     result = await vid_to_gif(inputfile, outputfile, speed=args)
@@ -477,4 +476,3 @@ async def _(event):
     for i in [inputfile, outputfile]:
         if os.path.exists(i):
             os.remove(i)
-

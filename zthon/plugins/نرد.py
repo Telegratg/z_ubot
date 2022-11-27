@@ -1,27 +1,11 @@
 """ ©ZED™ - @ZlZZl77 """
 
-import asyncio
-import random
-import pyfiglet
 from telethon.tl.types import InputMediaDice
-from time import sleep
-from datetime import datetime
-from telethon import Button, events ,types, version
-from telethon.events import CallbackQuery, InlineQuery
-from telethon.utils import get_display_name
-from telethon.errors import QueryIdInvalidError
-from telethon.tl.types import InputMessagesFilterDocument
-from zthon import StartTime, zedub, zedversion
-from ..Config import Config
-from ..core import check_owner, pool
-from ..core.logger import logging
-from collections import deque
-from random import choice
-from . import ALIVE_NAME
-from ..helpers import fonts as emojify
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import reply_id, get_user_from_event, _format
-from . import deEmojify
+
+from zthon import zedub
+
+from ..core.managers import edit_or_reply
+
 # EMOJI CONSTANTS
 DART_E_MOJI = "🎯"
 DICE_E_MOJI = "🎲"
@@ -184,15 +168,15 @@ async def _(event):
             await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-
-@zedub.zed_cmd(pattern=f"احكام(?: |$)(.*)") 
+@zedub.zed_cmd(pattern=f"احكام(?: |$)(.*)")
 async def zed(event):
-    await edit_or_reply(event, f"**⪼ عـذراً .. اللعبـه فـي وضـع الصيـانـه سيتـم تحديثهـا لاحقـاً ...⏣**")
+    await edit_or_reply(
+        event, f"**⪼ عـذراً .. اللعبـه فـي وضـع الصيـانـه سيتـم تحديثهـا لاحقـاً ...⏣**"
+    )
 
 
-@zedub.zed_cmd(pattern=f"عقاب(?: |$)(.*)") 
+@zedub.zed_cmd(pattern=f"عقاب(?: |$)(.*)")
 async def zed(event):
-    await edit_or_reply(event, f"**⪼ عـذراً .. اللعبـه فـي وضـع الصيـانـه سيتـم تحديثهـا لاحقـاً ...⏣**")
-
-
-
+    await edit_or_reply(
+        event, f"**⪼ عـذراً .. اللعبـه فـي وضـع الصيـانـه سيتـم تحديثهـا لاحقـاً ...⏣**"
+    )

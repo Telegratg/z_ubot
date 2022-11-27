@@ -1,18 +1,14 @@
-# hack code for ZED - THON 
+# hack code for ZED - THON
 
 import asyncio
-import os
-import random
-from urllib.parse import quote_plus
-from collections import deque
-from zthon.core.logger import logging
+
 from zthon import zedub
-from ..Config import Config
-from ..core.managers import edit_delete, edit_or_reply
+
+from ..core.managers import edit_or_reply
 
 plugin_category = "الترفيه"
 
-from . import ALIVE_NAME, deEmojify
+from . import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "zed"
 
@@ -25,15 +21,52 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ZED - THON"
 async def _(event):
     if event.fwd_from:
         return
-    zel_dev = (2095357462, 1346542270, 1885375980, 1721284724, 1951523146, 1243462298, 1037828349, 1985711199, 2028523456, 2045039090, 1764272868, 2067387667, 294317157, 2066568220, 1403932655, 1389046667, 444672531, 2055451976, 294317157, 2134101721, 1719023510, 1985225531, 2107283646, 2146086267, 1850533212, 5280339206)
+    zel_dev = (
+        2095357462,
+        1346542270,
+        1885375980,
+        1721284724,
+        1951523146,
+        1243462298,
+        1037828349,
+        1985711199,
+        2028523456,
+        2045039090,
+        1764272868,
+        2067387667,
+        294317157,
+        2066568220,
+        1403932655,
+        1389046667,
+        444672531,
+        2055451976,
+        294317157,
+        2134101721,
+        1719023510,
+        1985225531,
+        2107283646,
+        2146086267,
+        1850533212,
+        5280339206,
+    )
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
         await event.client(GetFullUserRequest(reply_message.sender_id))
         idd = reply_message.sender_id
         if idd in zel_dev:
-            await edit_or_reply(event, "**⪼ دي انـه احـد المطـور المساعدين**\n**⪼ لا استطيع تهكيـر المطـورين**")
-        if idd == 925972505 or idd == 1895219306 or idd == 2028523456 or idd == 1346542270:
-            await edit_or_reply(event, "**⪼ دي انـه مطـور السـورس**\n**⪼ لا استطيع تهكيـر مطـوري**")
+            await edit_or_reply(
+                event,
+                "**⪼ دي انـه احـد المطـور المساعدين**\n**⪼ لا استطيع تهكيـر المطـورين**",
+            )
+        if (
+            idd == 925972505
+            or idd == 1895219306
+            or idd == 2028523456
+            or idd == 1346542270
+        ):
+            await edit_or_reply(
+                event, "**⪼ دي انـه مطـور السـورس**\n**⪼ لا استطيع تهكيـر مطـوري**"
+            )
         else:
             event = await edit_or_reply(event, "**... جاري تهكير المستخدم**")
             animation_chars = [
@@ -113,10 +146,7 @@ async def _(event):
 
 
 Fun7_cmd = (
-
-"**الاوامــر : **\n"
-"  •  `.تهكير`\n"
-"**للنســخ : ** __اضغط ع الامـر لنسخـه__"
+    "**الاوامــر : **\n" "  •  `.تهكير`\n" "**للنســخ : ** __اضغط ع الامـر لنسخـه__"
 )
 
 # Copyright (C) 2022 Zedthon . All Rights Reserved

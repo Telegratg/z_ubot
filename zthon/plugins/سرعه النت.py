@@ -51,9 +51,7 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    zedevent = await edit_or_reply(
-        event, "** ▷ جـاري قيـاس سرعـة الانتـرنت... ◃**"
-    )
+    zedevent = await edit_or_reply(event, "** ▷ جـاري قيـاس سرعـة الانتـرنت... ◃**")
     start = time()
     s = speedtest.Speedtest()
     s.get_best_server()

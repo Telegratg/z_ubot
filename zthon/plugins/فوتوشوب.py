@@ -75,7 +75,9 @@ async def remove_background(event):
     message_id = await reply_id(event)
     if event.reply_to_msg_id and not input_str:
         reply_message = await event.get_reply_message()
-        catevent = await edit_or_reply(event, "**╮ ❐ جـارِ ازالـة خلفيـة الصوره/الملصق 𓅫╰**")
+        catevent = await edit_or_reply(
+            event, "**╮ ❐ جـارِ ازالـة خلفيـة الصوره/الملصق 𓅫╰**"
+        )
         file_name = os.path.join(Config.TEMP_DIR, "rmbg.png")
         try:
             await event.client.download_media(reply_message, file_name)
@@ -88,7 +90,9 @@ async def remove_background(event):
             response = ReTrieveFile(file_name)
             os.remove(file_name)
     elif input_str:
-        catevent = await edit_or_reply(event, "**╮ ❐ جـارِ ازالـة خلفيـة الصوره المحدده 𓅫╰**")
+        catevent = await edit_or_reply(
+            event, "**╮ ❐ جـارِ ازالـة خلفيـة الصوره المحدده 𓅫╰**"
+        )
         response = ReTrieveURL(input_str)
     else:
         await edit_delete(

