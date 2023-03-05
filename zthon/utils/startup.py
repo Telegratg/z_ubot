@@ -29,7 +29,7 @@ from .pluginmanager import load_module
 from .tools import create_supergroup
 
 ENV = bool(os.environ.get("ENV", False))
-LOGS = logging.getLogger("إعداد زدثون")
+LOGS = logging.getLogger("إعداد الرعدثون")
 cmdhr = Config.COMMAND_HAND_LER
 
 if ENV:
@@ -79,7 +79,7 @@ async def startupmessage():
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/f821d27af168206b472ad.mp4",
                 caption="**•⎆┊تـم بـدء تشغـيل سـورس زدثــون الخاص بك .. بنجاح 🧸♥️**",
-                buttons=[(Button.url("𝙕𝙀𝘿𝙏𝙝𝙤𝙣𓅛", "https://t.me/ZedThon"),)],
+                buttons=[(Button.url("𝘼𝙇𝙍𝘼𝘿𝙏𝙃𝙀𝙉 ⩫𓅛", "https://t.me/ALRADTHEN"),)],
             )
     except Exception as e:
         LOGS.error(e)
@@ -156,7 +156,7 @@ async def mybot():
             await asyncio.sleep(1)
             await zedub.send_message(
                 "@BotFather",
-                f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @ZedThon 🌐",
+                f"•⎆┊انـا البــوت المسـاعـد الخــاص بـ {zel_zal} \n•⎆┊بـواسطـتـي يمكـنك التواصــل مـع مـالكـي 🧸♥️\n•⎆┊قنـاة السـورس 🌐 @ALRADTHEN 🌐",
             )
         except Exception as e:
             print(e)
